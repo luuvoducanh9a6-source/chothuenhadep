@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cho thuê nhà đẹp - Căn hộ và phòng trọ</title>
+<meta name="description" content="Cho thuê căn hộ và phòng trọ sạch đẹp, lọc theo khu vực, giá và diện tích. Đặt lịch xem phòng online.">
+<style>
+    :root{--main:#1f6b5c;--main-d:#174f44;--accent:#e8a33d;--ink:#1d2523;--muted:#6a7673;--bg:#f6f7f5;--card:#fff;--line:#e2e7e4;--soft:#eef4f1;--pic:linear-gradient(135deg,#dfe9e5,#c9dbd4);--ph:#dfe9e5;--shadow:0 8px 26px rgba(0,0,0,.09)}
+  @media (prefers-color-scheme: dark){:root{--main:#4fb89c;--main-d:#3aa087;--accent:#f0b35a;--ink:#e6eeeb;--muted:#9aaaa5;--bg:#0f1b19;--card:#172724;--line:#2a3d39;--soft:#1f3532;--pic:linear-gradient(135deg,#1f3532,#24413c);--ph:#1f3532;--shadow:0 8px 26px rgba(0,0,0,.45)}}
+  html{transition:background-color .3s ease}
+  body{transition:background-color .3s ease,color .3s ease}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+  a{color:var(--main);text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 18px}
+  header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--main)}
+  .brand img{height:38px;width:auto}
+  .hdr-actions{display:flex;gap:10px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 18px;border-radius:8px;background:var(--main);color:#fff;font-weight:600;font-size:14px;border:0;cursor:pointer}
+  .btn:hover{background:var(--main-d)}
+  .btn.light{background:var(--card);color:var(--main);border:1.5px solid var(--main)}
+  .btn.accent{background:var(--accent);color:#1d2523}
+  .btn.accent:hover{background:#d8922c}
+  .hero{background:var(--main);color:#fff;padding:54px 0 90px}
+  .hero h1{font-size:34px;line-height:1.2;margin-bottom:10px}
+  .hero p{opacity:.92;max-width:620px}
+  .filters{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:18px;margin-top:-56px;position:relative;z-index:2}
+  .filters form{display:grid;grid-template-columns:repeat(5,1fr) auto;gap:12px;align-items:end}
+  .field label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
+  .field select,.field input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--card);color:var(--ink)}
+  .toolbar{display:flex;justify-content:space-between;align-items:center;margin:26px 0 14px;flex-wrap:wrap;gap:10px}
+  .count{color:var(--muted);font-size:14px}
+  .toolbar select{padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:var(--card)}
+  .tabs{display:flex;gap:8px;margin-top:6px}
+  .tab{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:600;cursor:pointer;font-size:14px}
+  .tab.on{background:var(--main);border-color:var(--main);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;margin-bottom:40px}
+  .card{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
+  .card .pic{height:180px;background:var(--pic);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;position:relative}
+  .card .pic img{width:100%;height:100%;object-fit:cover}
+  .badge{position:absolute;top:10px;left:10px;background:var(--accent);color:#1d2523;font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px}
+  .badge.gray{background:#7a8582;color:#fff}
+  .card .body{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card h3{font-size:16px;line-height:1.3}
+  .price{color:var(--main);font-weight:800;font-size:17px}
+  .meta{color:var(--muted);font-size:13px}
+  .amen{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .amen span{background:var(--soft);color:var(--main);font-size:12px;padding:3px 8px;border-radius:6px}
+  .card .actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 16px 16px}
+  .card .actions a,.card .actions button{padding:9px 6px;font-size:13px;text-align:center;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--main);font-weight:600;cursor:pointer;text-decoration:none}
+  .card .actions .primary{background:var(--main);color:#fff;border-color:var(--main)}
+  .empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--muted);background:var(--card);border-radius:14px;border:1px dashed var(--line)}
+  .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:10px 0 50px}
+  .why div{background:var(--card);border-radius:12px;padding:20px;border:1px solid var(--line)}
+  .why h4{color:var(--main);margin-bottom:6px}
+  .why p{color:var(--muted);font-size:14px}
+  .contact{background:var(--card);border-radius:14px;border:1px solid var(--line);padding:30px;margin-bottom:50px;text-align:center}
+  .contact p{color:var(--muted);margin-bottom:18px}
+  .contact .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  footer{background:#17201e;color:#c7d1cd;padding:38px 0;font-size:14px}
+  footer a{color:#c7d1cd}
+
+
+  /* ===== GIAO DIỆN CAO CẤP ===== */
+  body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+  h1,h2,h3,.brand{letter-spacing:-.025em}
+  header{background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line)}
+  .brand{font-weight:700}
+  .btn{border-radius:999px;padding:11px 22px;font-weight:600;letter-spacing:-.01em;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px color-mix(in srgb,var(--main) 35%,transparent)}
+  .btn.light{border-radius:999px}
+  .hero{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 85% 0%,color-mix(in srgb,var(--main) 70%,#fff) 0%,transparent 55%),linear-gradient(160deg,var(--main) 0%,var(--main-d) 100%);padding:96px 0 120px}
+  .hero::after{content:"";position:absolute;inset:auto -10% -40% auto;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%);pointer-events:none;animation:float 14s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,-20px)}}
+  .hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.04;font-weight:700;max-width:14ch;letter-spacing:-.035em}
+  .hero p{font-size:clamp(16px,1.6vw,19px);opacity:.88;max-width:560px;margin-top:18px;font-weight:400}
+  .hero .wrap{position:relative;z-index:1}
+  .filters{border-radius:20px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.14);backdrop-filter:blur(10px)}
+  .field label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .field select,.field input,.toolbar select{border-radius:12px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
+  .field select:focus,.field input:focus,.toolbar select:focus{outline:none;border-color:var(--main);box-shadow:0 0 0 4px color-mix(in srgb,var(--main) 18%,transparent)}
+  .card{border-radius:20px;border:1px solid var(--line)}
+  .card:hover{transform:translateY(-6px);box-shadow:0 30px 60px -20px rgba(0,0,0,.28);border-color:color-mix(in srgb,var(--main) 50%,var(--line))}
+  .card .pic{height:200px;background:var(--pic)}
+  .card .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.18));pointer-events:none}
+  .card .actions a,.card .actions button{border-radius:999px;padding:10px 8px}
+  .tab{border-radius:999px;padding:10px 18px;font-weight:500}
+  .tab.on{box-shadow:0 6px 16px color-mix(in srgb,var(--main) 30%,transparent)}
+  .drawer{border-radius:0}
+  .drawer-head b{font-weight:700;letter-spacing:-.015em}
+  .d-title{font-weight:700;letter-spacing:-.02em}
+  .d-price{letter-spacing:-.02em}
+  .d-photos div{border-radius:14px}
+  .sheet{border-radius:22px}
+  .drawer-foot a,.drawer-foot button{border-radius:999px}
+  .drawer-foot .primary,.card .actions .primary{box-shadow:0 6px 16px color-mix(in srgb,var(--main) 30%,transparent)}
+  .contact,.why div{border-radius:20px}
+  .why div{transition:transform .3s ease,box-shadow .3s ease}
+  .why div:hover{transform:translateY(-4px);box-shadow:0 18px 40px -18px rgba(0,0,0,.25)}
+  @media (prefers-reduced-motion:reduce){.hero::after{animation:none}}
+
+  /* Thẻ căn kiểu mới */
+  .card{cursor:pointer}
+  .card .pic{height:210px;position:relative;overflow:hidden}
+  .card .pic img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .pic .ph-text{color:var(--muted)}
+  .type-tag{position:absolute;left:12px;top:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)}
+  .st-pill{position:absolute;right:12px;top:12px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)}
+  .st-pill.ok{background:var(--main);color:#fff}
+  .st-pill.gone{background:rgba(255,255,255,.85);color:#4b5552}
+  .card .body{padding:14px 16px 6px;display:block}
+  .row1{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+  .chip{background:var(--soft);color:var(--main);font-weight:700;font-size:13px;padding:6px 10px;border-radius:10px;white-space:nowrap}
+  .card .price{font-size:19px;font-weight:800;color:var(--main);white-space:nowrap;letter-spacing:-.02em}
+  .card .price small{font-size:12px;font-weight:500;color:var(--muted)}
+  .addr{font-size:14px;color:var(--ink);line-height:1.4;margin-bottom:12px;min-height:40px}
+  .amen{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-height:28px}
+  .amen .ic{background:var(--soft);color:var(--main);font-size:12px;padding:5px 9px;border-radius:999px}
+  .amen .more{font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+  .detail-btn{margin:12px 16px 16px;padding:12px;border-radius:12px;border:0;background:var(--main);color:#fff;font-weight:700;font-size:14px;cursor:pointer;transition:background-color .2s,transform .15s}
+  .detail-btn:hover{background:var(--main-d)}
+  .detail-btn:active{transform:scale(.98)}
+  /* Chừa chỗ cho huy hiệu của Netlify ở góc dưới để không che nút */
+  body{padding-bottom:72px}
+  .drawer-foot{padding-bottom:calc(14px + 64px)}
+  .card .detail-btn:last-child{margin-bottom:16px}
+  .d-photos > div{cursor:zoom-in}
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;z-index:90;opacity:0;pointer-events:none;transition:opacity .2s}
+  .lightbox.open{opacity:1;pointer-events:auto}
+  .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:scale(.97);transition:transform .25s}
+  .lightbox.open img{transform:none}
+  .lb-x{position:absolute;top:14px;right:16px;background:none;border:0;color:#fff;font-size:40px;line-height:1;cursor:pointer;padding:6px 12px}
+  .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.14);border:0;color:#fff;font-size:44px;line-height:1;width:52px;height:64px;border-radius:12px;cursor:pointer;transition:background .2s}
+  .lb-nav:hover{background:rgba(255,255,255,.28)}
+  .lb-prev{left:12px}.lb-next{right:12px}
+  .lb-count{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:#fff;font-size:14px;background:rgba(0,0,0,.4);padding:4px 12px;border-radius:999px}
+  .brand-logo{display:inline-block;width:44px;height:44px;background:var(--main);-webkit-mask:url(data:image/png;base64,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) center/contain no-repeat;mask:url(data:image/png;base64,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) center/contain no-repeat;transition:background-color .3s ease,transform .3s ease}
+  .brand:hover .brand-logo{transform:rotate(-6deg) scale(1.05)}
+  .brand{text-decoration:none}
+  .card-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 16px 16px}
+  .card-actions .detail-btn{margin:0}
+  .detail-btn.ghost{background:var(--card);color:var(--main);border:1.5px solid var(--main)}
+  .detail-btn.ghost:hover{background:var(--soft)}
+  .detail-btn[disabled]{opacity:.5;cursor:not-allowed}
+  .head-book{margin-left:auto;margin-right:10px;padding:8px 14px;border-radius:999px;border:0;background:var(--main);color:#fff;font-weight:700;font-size:13px;cursor:pointer}
+  .head-book:hover{background:var(--main-d)}
+  /* Đầu trang nhiều thông tin hơn */
+  .hero{background:radial-gradient(90% 70% at 100% 0%,rgba(255,255,255,.18),transparent 60%),radial-gradient(70% 60% at 0% 100%,color-mix(in srgb,var(--accent) 35%,transparent),transparent 65%),linear-gradient(160deg,var(--main) 0%,var(--main-d) 100%)}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000,transparent 80%);pointer-events:none}
+  .hero .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:999px;margin-bottom:18px}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:34px;max-width:620px}
+  .hero-stats div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:14px 16px;backdrop-filter:blur(8px)}
+  .hero-stats b{display:block;font-size:clamp(20px,2.4vw,28px);font-weight:800;letter-spacing:-.02em}
+  .hero-stats span{font-size:12px;opacity:.85}
+  @media (max-width:520px){.hero-stats{grid-template-columns:1fr}}
+  /* Hiệu ứng */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes heroIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+  .hero .wrap{animation:heroIn .7s ease both}
+  .filters{animation:fadeUp .6s ease .15s both}
+  .card{animation:fadeUp .45s ease both;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+  .card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(n+5){animation-delay:.2s}
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--main)}
+  .card .pic img{transition:transform .4s ease}
+  .card:hover .pic img{transform:scale(1.04)}
+  .btn,.tab,.card .actions a,.card .actions button,.drawer-foot a,.drawer-foot button{transition:background-color .2s,color .2s,transform .15s,border-color .2s}
+  .btn:active,.tab:active,.card .actions a:active,.card .actions button:active{transform:scale(.97)}
+  .tab:hover{border-color:var(--main);color:var(--main)}
+  .drawer{transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+  .sheet{animation:fadeUp .3s ease both}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  .d-photos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:repeat(2,120px);gap:6px}
+  .d-photos > div{position:relative;background:var(--ph);border-radius:10px;overflow:hidden;height:auto}
+  .d-photos > div.big{grid-row:span 2;height:auto}
+  .d-photos img{width:100%;height:100%;object-fit:cover;display:block}
+  .more-ph{position:absolute;inset:0;background:rgba(0,0,0,.5);color:#fff;font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  /* Bảng chi tiết */
+  .drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+  .drawer-bg.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:var(--card);transform:translateX(100%);transition:transform .28s ease;z-index:61;display:flex;flex-direction:column;box-shadow:-10px 0 30px rgba(0,0,0,.15)}
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line)}
+  .drawer-head b{font-size:16px}
+  .drawer-x{background:none;border:0;font-size:26px;line-height:1;cursor:pointer;color:var(--muted);padding:4px 8px}
+  .drawer-body{flex:1;overflow-y:auto;padding:18px}
+  .d-photos{display:grid;grid-template-columns:2fr 1fr;gap:6px;margin-bottom:16px}
+  .d-photos div{background:var(--ph);border-radius:8px;height:150px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px}
+  .d-photos div.big{grid-row:span 2;height:auto;min-height:154px}
+  .d-title{font-size:19px;margin-bottom:4px}
+  .d-price{color:var(--main);font-size:22px;font-weight:800}
+  .d-price small{font-size:13px;color:var(--muted);font-weight:500}
+  .d-tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;margin:6px 0 14px}
+  .d-tag.con{background:var(--soft);color:var(--main)}
+  .d-tag.het{background:var(--line);color:var(--muted)}
+  .d-sec{margin-top:18px}
+  .d-sec h4{font-size:13px;letter-spacing:.4px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .d-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .d-grid div span{display:block;font-size:12px;color:var(--muted)}
+  .d-grid div b{font-size:14px;font-weight:600}
+  .d-list{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+  .d-list li{background:var(--soft);color:var(--main);font-size:13px;padding:4px 10px;border-radius:6px}
+  .d-fee{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:7px 0;font-size:14px}
+  .d-fee span:last-child{font-weight:600}
+  .drawer-foot{padding:14px 18px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr 1.3fr;gap:8px}
+  .drawer-foot a,.drawer-foot button{padding:11px 6px;border-radius:8px;text-align:center;font-weight:600;font-size:14px;cursor:pointer;border:1px solid var(--main);text-decoration:none;background:var(--card);color:var(--main)}
+  .drawer-foot .primary{background:var(--main);color:#fff}
+  .drawer-foot button[disabled]{opacity:.45;cursor:not-allowed}
+  /* Modal đặt lịch xem */
+  .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:50}
+  .modal.open{display:flex}
+  .sheet{background:var(--card);border-radius:14px;max-width:480px;width:100%;padding:24px;position:relative}
+  .sheet h3{font-size:19px;margin-bottom:4px}
+  .sheet .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .sheet .x{position:absolute;right:14px;top:10px;background:none;border:0;font-size:24px;cursor:pointer;color:var(--muted)}
+  .sheet form{display:grid;gap:12px}
+  .sheet input,.sheet textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit}
+  .sheet .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .note{font-size:12px;color:var(--muted)}
+  @media (max-width:900px){.filters form{grid-template-columns:1fr 1fr}.hero h1{font-size:26px}.filters{margin-top:-40px}}
+  @media (max-width:520px){.filters form{grid-template-columns:1fr}.hdr-actions .btn.light{display:none}}
+  .view-lbl{display:block;font-size:13px;font-weight:600;margin:4px 0 6px}
+  /* Đồng bộ kích thước nút: cùng chiều cao, cùng viền, cùng chiều rộng */
+  .card-actions{grid-template-columns:1fr 1fr}
+  .card-actions .detail-btn{box-sizing:border-box;height:46px;width:100%;margin:0;padding:0 12px;border:1.5px solid var(--main);display:flex;align-items:center;justify-content:center;white-space:nowrap}
+  .drawer-foot{grid-template-columns:1fr 1fr 1fr}
+  .drawer-foot a,.drawer-foot button{box-sizing:border-box;height:46px;border:1.5px solid var(--main);display:flex;align-items:center;justify-content:center;width:100%}
+  .amen-bar{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+  .amen-chip{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:13px;font-weight:600;cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
+  .amen-chip:hover{border-color:var(--main)}
+  .amen-chip.on{background:var(--main);color:#fff;border-color:var(--main)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="#" class="brand"><span class="brand-logo" role="img" aria-label="Cho thuê nhà đẹp"></span>>Cho thuê nhà đẹp</a>
+    <div class="hdr-actions">
+      <a class="btn light" href="tel:0978071601">Gọi ngay</a>
+      <a class="btn" href="https://zalo.me/0978071601">Nhắn Zalo</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Cho thuê phòng trọ &amp; căn hộ · TP.HCM</span>
+    <h1>Tìm nơi ở phù hợp, rõ giá, rõ điều kiện.</h1>
+    <p>Lọc theo khu vực, giá và diện tích. Xem chi tiết từng phòng và đặt lịch xem trực tiếp chỉ trong vài bước.</p>
+    <div class="hero-stats">
+      <div><b id="hsCount">0</b><span>phòng đang trống</span></div>
+      <div><b id="hsMin">—</b><span>giá thuê thấp nhất</span></div>
+      <div><b id="hsArea">—</b><span>khu vực đang có phòng</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="filters">
+    <form id="filterForm" onsubmit="return false">
+      <div class="field"><label for="fType">Loại</label>
+        <select id="fType"><option value="">Tất cả</option><option value="can-ho">Căn hộ</option><option value="phong-tro">Phòng trọ</option><option value="mat-bang">Mặt bằng</option></select></div>
+      <div class="field"><label for="fArea">Khu vực</label>
+        <select id="fArea"><option value="">Tất cả khu vực</option></select></div>
+      <div class="field"><label for="fPrice">Giá tối đa</label>
+        <select id="fPrice"><option value="">Không giới hạn</option><option value="3000000">Dưới 3 triệu</option><option value="5000000">Dưới 5 triệu</option><option value="8000000">Dưới 8 triệu</option><option value="12000000">Dưới 12 triệu</option></select></div>
+      <div class="field"><label for="fSize">Diện tích tối thiểu</label>
+        <select id="fSize"><option value="">Không giới hạn</option><option value="15">Từ 15 m²</option><option value="25">Từ 25 m²</option><option value="40">Từ 40 m²</option><option value="60">Từ 60 m²</option></select></div>
+      <div class="field"><label for="fStatus">Tình trạng</label>
+        <select id="fStatus"><option value="">Tất cả</option><option value="con">Còn trống</option><option value="het">Đã thuê</option></select></div>
+      <button class="btn" id="resetBtn" type="button" style="background:var(--card);color:var(--main);border:1.5px solid var(--main)">Xóa lọc</button>
+    </form>
+    <div class="amen-bar" id="amenBar"><button type="button" class="amen-chip" data-amen="Điều hòa">Điều hòa</button><button type="button" class="amen-chip" data-amen="Máy nước nóng">Máy nước nóng</button><button type="button" class="amen-chip" data-amen="Tủ lạnh">Tủ lạnh</button><button type="button" class="amen-chip" data-amen="Máy giặt">Máy giặt</button><button type="button" class="amen-chip" data-amen="Tivi">Tivi</button><button type="button" class="amen-chip" data-amen="Tủ quần áo">Tủ quần áo</button><button type="button" class="amen-chip" data-amen="Giường">Giường</button><button type="button" class="amen-chip" data-amen="Nệm">Nệm</button><button type="button" class="amen-chip" data-amen="Cửa sổ">Cửa sổ</button><button type="button" class="amen-chip" data-amen="Ban công">Ban công</button><button type="button" class="amen-chip" data-amen="Thang máy">Thang máy</button><button type="button" class="amen-chip" data-amen="Thú cưng">Thú cưng</button><button type="button" class="amen-chip" data-amen="Giếng trời">Giếng trời</button><button type="button" class="amen-chip" data-amen="Kệ bếp">Kệ bếp</button><button type="button" class="amen-chip" data-amen="Xe điện">Xe điện</button><button type="button" class="amen-chip" data-amen="An ninh">An ninh</button><button type="button" class="amen-chip" data-amen="Chủ ở chung">Chủ ở chung</button><button type="button" class="amen-chip" data-amen="Gác lửng">Gác lửng</button><button type="button" class="amen-chip" data-amen="Bồn rửa chén">Bồn rửa chén</button></div>
+  </div>
+
+  <div class="toolbar">
+    <div>
+      <div class="tabs" id="tabs">
+        <button class="tab on" data-tab="all">Tất cả</button>
+        <button class="tab" data-tab="can-ho">Căn hộ</button>
+        <button class="tab" data-tab="phong-tro">Phòng trọ</button>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <span class="count" id="count"></span>
+      <select id="sort">
+        <option value="new">Mới đăng</option>
+        <option value="priceAsc">Giá thấp đến cao</option>
+        <option value="priceDesc">Giá cao đến thấp</option>
+        <option value="sizeDesc">Diện tích lớn nhất</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="why">
+    <div><h4>Thông tin đúng thực tế</h4><p>Diện tích, giá và tiện ích đúng như khi bạn xem phòng.</p></div>
+    <div><h4>Giá minh bạch</h4><p>Ghi rõ đã gồm hay chưa gồm điện, nước, phí dịch vụ.</p></div>
+    <div><h4>Đặt lịch xem nhanh</h4><p>Chọn giờ, gửi yêu cầu, chúng tôi xác nhận lại qua điện thoại hoặc Zalo.</p></div>
+  </div>
+
+  <div class="contact" id="lien-he">
+    <h3 style="margin-bottom:6px">Cần tư vấn thêm?</h3>
+    <p>Gọi hoặc nhắn Zalo, chúng tôi trả lời trong ngày.</p>
+    <div class="row">
+      <a class="btn" href="tel:0978071601">Gọi 0978 07 16 01</a>
+      <a class="btn light" href="https://zalo.me/0978071601">Nhắn Zalo</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>© chothuenhadep · 1412 đường 30 tháng 4, phường Phước Thắng, Thành phố Hồ Chí Minh · 0978 07 16 01 · luuvoducanh9a6@gmail.com</p>
+  </div>
+</footer>
+
+<!-- Bảng chi tiết phòng -->
+<div class="drawer-bg" id="drawerBg" onclick="closeDetail()"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Chi tiết phòng">
+  <div class="drawer-head">
+    <b id="dTitle">Chi tiết</b>
+    <button class="head-book" id="dBook" type="button">Đặt lịch</button>
+    <button class="drawer-x" onclick="closeDetail()" aria-label="Đóng">×</button>
+  </div>
+  <div class="drawer-body" id="dBody"></div>
+  <div class="drawer-foot" id="dFoot"></div>
+</aside>
+
+<!-- Xem ảnh phóng to -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-x" onclick="closeLightbox()" aria-label="Đóng">×</button>
+  <button class="lb-nav lb-prev" id="lbPrev" onclick="event.stopPropagation();lbStep(-1)" aria-label="Ảnh trước">‹</button>
+  <img id="lbImg" src="" alt="" onclick="event.stopPropagation()">
+  <button class="lb-nav lb-next" id="lbNext" onclick="event.stopPropagation();lbStep(1)" aria-label="Ảnh sau">›</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
+
+<!-- Modal đặt lịch xem -->
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet">
+    <button class="x" onclick="closeModal()" aria-label="Đóng">×</button>
+    <h3>Đặt lịch xem</h3>
+    <p class="sub" id="modalTitle"></p>
+    <form id="bookForm">
+      <input name="name" placeholder="Họ và tên" required>
+      <input name="phone" placeholder="Số điện thoại / Zalo" required inputmode="tel">
+      <label class="view-lbl" id="viewLabel">Ngày giờ xem phòng</label>
+      <input name="viewing" type="text" required placeholder="Ví dụ: 14h00 thứ bảy, ngày 28/11/2026">
+      <textarea name="note" rows="3" placeholder="Ghi chú (không bắt buộc)"></textarea>
+      <button class="btn accent" type="submit">Gửi yêu cầu</button>
+      <p class="note">Yêu cầu sẽ gửi về email của chúng tôi. Chúng tôi xác nhận lại qua điện thoại hoặc Zalo.</p>
+    </form>
+  </div>
+</div>
+
+<script>
+// ===== DANH SÁCH PHÒNG =====
+// Mỗi phòng là một dòng. Thêm phòng mới bằng cách copy một dòng và sửa dữ liệu.
+// type: "can-ho" hoặc "phong-tro"; status: "con" (còn trống) hoặc "het" (đã thuê)
+var LISTINGS_ALL = [
+  {id:4, type:"can-ho", title:"Căn hộ 2 phòng ngủ", area:"Quận 10", size:0, price:8200000, deposit:8200000, status:"con", added:"2026-11-21", img:"photos/p1.jpg",
+   imgs:["photos/p1.jpg","photos/p2.jpg","photos/p3.jpg","photos/p4.jpg","photos/p5.jpg","photos/p6.jpg","photos/p7.jpg","photos/p8.jpg","photos/p9.jpg"],
+   amen:["Điều hòa","Nước nóng","Tủ lạnh","Máy giặt","Tủ quần áo","Giường","Nệm","Kệ bếp","Ban công","Cửa sổ","Để xe (chung)","Sân phơi (chung)","Bồn rửa chén"],
+   floor:"Tầng 1", rooms:"2 phòng ngủ", people:"2 người", toilet:"Riêng", lock:"Vân tay", hours:"Tự do", parking:"3 xe", fees:[["Điện","4.000 đ/kWh"],["Nước","100.000 đ/người"],["Quản lý","200.000 đ/phòng"]], address:"38/•• Nguyễn Giãn Thanh, Phường 15, Quận 10, Thành phố Hồ Chí Minh"},,
+  {id:5, type:"phong-tro", title:"Phòng 07", area:"Tân Phú", size:20, price:3200000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"149/•• Lý Thánh Tông, Tân Thới Hòa, Tân Phú, Hồ Chí Minh"},
+  {id:6, type:"phong-tro", title:"Phòng 208", area:"Tân Phú", size:20, price:3200000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"58/•• Hoa Bằng, Tân Sơn Nhì, Tân Phú, Hồ Chí Minh"},
+  {id:7, type:"phong-tro", title:"Phòng 101", area:"Bình Tân", size:20, price:2200000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"413/•• Lê Văn Quới, Bình Trị Đông, Hồ Chí Minh"},
+  {id:8, type:"phong-tro", title:"Phòng 201", area:"Tân Bình", size:25, price:3900000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"159/•• Bạch Đằng, Tân Sơn Hoà, Hồ Chí Minh"},
+  {id:9, type:"phong-tro", title:"Phòng 203", area:"Q.7", size:20, price:6000000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nguyễn Thị Thập, Phường Bình Thuận, Quận 7, Hồ Chí Minh"},
+  {id:10, type:"phong-tro", title:"Phòng 201", area:"Q.7", size:20, price:6500000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nguyễn Thị Thập, Phường Bình Thuận, Quận 7, Hồ Chí Minh"},
+  {id:11, type:"phong-tro", title:"Phòng 11", area:"Q.7", size:25, price:3800000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nguyễn Văn Quỳ, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:12, type:"phong-tro", title:"Phòng 202", area:"Q.7", size:25, price:3000000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Trần Xuân Soạn, Tân Kiểng, Q.7, Hồ Chí Minh"},
+  {id:13, type:"phong-tro", title:"Phòng 213", area:"Q.7", size:20, price:3700000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đường số 47, Tân Quy, Q.7, Hồ Chí Minh"},
+  {id:14, type:"phong-tro", title:"Phòng P Tầng Lửng", area:"Q.7", size:20, price:3500000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền đường số 10 KDC Nam Long, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:15, type:"phong-tro", title:"Phòng T01", area:"Q.7", size:20, price:3700000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"49/•• Phạm Hữu Lầu, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:16, type:"phong-tro", title:"Phòng P5A", area:"Q.7", size:29, price:3700000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đường Số 1, Tân Phú, Q.7, Hồ Chí Minh"},
+  {id:17, type:"phong-tro", title:"Phòng 302", area:"Q.7", size:20, price:3200000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Phạm Hữu Lầu, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:18, type:"phong-tro", title:"Phòng 16", area:"Q.7", size:20, price:3700000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"96/•• Tân Mỹ, Tân Thuận Tây, Q.7, Hồ Chí Minh"},
+  {id:19, type:"phong-tro", title:"Phòng 102", area:"Q.7", size:25, price:3000000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Trần Xuân Soạn, Tân Kiểng, Q.7, Hồ Chí Minh"},
+  {id:20, type:"phong-tro", title:"Phòng 301", area:"Q.7", size:20, price:3500000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"90/•• Đường Số 2 Hoàng Quốc Việt, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:21, type:"phong-tro", title:"Phòng B315", area:"Q.7", size:25, price:3900000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"441/•• Lê Văn Lương, Tân Phong, Q.7, Hồ Chí Minh"},
+  {id:22, type:"phong-tro", title:"Phòng P03", area:"Q.7", size:15, price:3500000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"1135/••/•• Huỳnh Tấn Phát, Tân Thuận Tây, Q.7, Hồ Chí Minh"},
+  {id:23, type:"phong-tro", title:"Phòng 101", area:"Q.7", size:18, price:3900000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"156/••/•• Huỳnh Tấn Phát, Phường Tân Thuận Tây, Quận 7, Hồ Chí Minh"},
+  {id:24, type:"phong-tro", title:"Phòng 201", area:"Q.7", size:16, price:3300000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"88/••/•• Nguyễn Văn Quỳ, Phường Phú Thuận, Quận 7, Hồ Chí Minh"},
+  {id:100, type:"phong-tro", title:"Phòng 301", area:"Quận 7", size:20, price:3400000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"56/•• Chuyên Dùng 9, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:101, type:"phong-tro", title:"Phòng 02", area:"Quận 7", size:20, price:3700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đường Số 2 KDC Tân Thành Lập, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:102, type:"phong-tro", title:"Phòng (chưa có mã)", area:"Quận 7", size:20, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"1135/•• Huỳnh Tấn Phát, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:103, type:"phong-tro", title:"Phòng 102", area:"TP.HCM", size:25, price:3900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đường số 5, Phạm Hữu Lầu, Tân Mỹ, Hồ Chí Minh"},
+  {id:104, type:"phong-tro", title:"Phòng 202", area:"Quận 7", size:20, price:3700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"1321/•• Huỳnh Tấn Phát, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:105, type:"phong-tro", title:"Phòng 51B", area:"Quận 7", size:20, price:3900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nguyễn Văn Linh, Tân Thuận Tây, Q.7, Hồ Chí Minh"},
+  {id:106, type:"phong-tro", title:"Phòng 302", area:"TP.HCM", size:20, price:3000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Hoàng Quốc Việt, Phú Thuận, Hồ Chí Minh"},
+  {id:107, type:"phong-tro", title:"Phòng 301", area:"Tân Phú", size:25, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"27/•• Nguyễn Thị Thập, Tân Phú, Q.7, Hồ Chí Minh"},
+  {id:108, type:"phong-tro", title:"Phòng GOM9", area:"Quận 7", size:20, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Gò Ô Môi, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:109, type:"phong-tro", title:"Phòng 01", area:"Quận 7", size:20, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"56/••/•• Gò Ô Môi, Phường Phú Thuận, Quận 7, Hồ Chí Minh"},
+  {id:110, type:"phong-tro", title:"Phòng 01", area:"Quận 7", size:25, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"502/•• Huỳnh Tấn Phát, Bình Thuận, Q.7, Hồ Chí Minh"},
+  {id:111, type:"phong-tro", title:"Phòng GOM18", area:"Quận 7", size:20, price:3000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Gò Ô Môi, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:112, type:"phong-tro", title:"Phòng 01", area:"Quận 7", size:20, price:3700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"865/•• Huỳnh Tấn Phát, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:113, type:"phong-tro", title:"Phòng 304", area:"Quận 7", size:20, price:3700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"96/•• Nguyễn Thị Thập, Bình Thuận, Q.7, Hồ Chí Minh"},
+  {id:114, type:"phong-tro", title:"Phòng 08", area:"Quận 7", size:18, price:3700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"49/••/•• Phạm Hữu Lầu, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:115, type:"phong-tro", title:"Phòng Trệt", area:"Quận 7", size:30, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đường Số D4, KDC Jamona City, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:116, type:"phong-tro", title:"Phòng 103", area:"Quận 7", size:20, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền đường số 10 Lý Phục Man, Bình Thuận, Q.7, Hồ Chí Minh"},
+  {id:117, type:"phong-tro", title:"Phòng 205", area:"Quận 7", size:20, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"39/•• Bùi Văn Ba, Tân Thuận Đông, Q.7, Hồ Chí Minh"},
+  {id:118, type:"phong-tro", title:"Phòng P105", area:"Quận 7", size:20, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nguyễn Thị Thập, Bình Thuận, Q.7, Hồ Chí Minh"},
+  {id:119, type:"phong-tro", title:"Phòng 304", area:"Quận 7", size:20, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền đường số 10 Lý Phục Man, Bình Thuận, Q.7, Hồ Chí Minh"},
+  {id:120, type:"phong-tro", title:"Phòng 101", area:"Quận 7", size:20, price:3200000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Phạm Hữu Lầu, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:121, type:"phong-tro", title:"Phòng 04", area:"Quận 7", size:20, price:3600000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"1/•• Võ Thị Nhờ, Tân Thuận Đông, Q.7, Hồ Chí Minh"},
+  {id:122, type:"phong-tro", title:"Phòng G02", area:"Quận 7", size:25, price:7000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đường số 37, Phường Bình Thuận, Quận 7, TP.HCM, Hồ Chí Minh"},
+  {id:123, type:"phong-tro", title:"Phòng 201", area:"Tân Phú", size:15, price:5500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Luỹ Bán Bích, Tân Thới Hòa, Tân Phú, Hồ Chí Minh"},
+  {id:124, type:"phong-tro", title:"Phòng 08", area:"Quận 7", size:20, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Huỳnh Tấn Phát, Tân Thuận Đông, Q.7, Hồ Chí Minh"},
+  {id:125, type:"phong-tro", title:"Phòng 202", area:"Quận 7", size:25, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"20/•• Phú Thuận, Phú Thuận, Q.7, Hồ Chí Minh"},
+  {id:126, type:"phong-tro", title:"Phòng 007", area:"Quận 7", size:20, price:2900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Huỳnh Tấn Phát Q7, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:127, type:"phong-tro", title:"Phòng 504", area:"Tân Bình", size:20, price:4600000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Phan Văn Sửu, P.13, Tân Bình, Hồ Chí Minh"},
+  {id:128, type:"phong-tro", title:"Phòng 1.2", area:"Tân Bình", size:20, price:4900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"554/•• Cộng Hoà, P.13, Tân Bình, Hồ Chí Minh"},
+  {id:129, type:"phong-tro", title:"Phòng G06", area:"Quận 7", size:20, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"34/•• Lê Thị Chợ, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:130, type:"phong-tro", title:"Phòng 103", area:"Gò Vấp", size:18, price:3000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"198/•• Đường Số 3, P.8, Gò Vấp, Hồ Chí Minh"},
+  {id:131, type:"phong-tro", title:"Phòng 109", area:"Bình Trị Đông", size:20, price:4500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"273/•• Tân Hoà Đông, Bình Trị Đông, Bình Tân, Hồ Chí Minh"},
+  {id:132, type:"phong-tro", title:"Phòng 103", area:"Quận 7", size:15, price:3300000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền đường số 25, Tân Quy, Q.7, Hồ Chí Minh"},
+  {id:133, type:"phong-tro", title:"Phòng (chưa có mã)", area:"Nhà Bè", size:20, price:4400000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Lê Văn Lương, Xã Nhơn Đức, Huyện Nhà Bè, Hồ Chí Minh"},
+  {id:134, type:"phong-tro", title:"Phòng K201", area:"Nhà Bè", size:25, price:4900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Lê Văn Lương, Xã Nhơn Đức, Huyện Nhà Bè, Hồ Chí Minh"},
+  {id:135, type:"phong-tro", title:"Phòng G004", area:"Nhà Bè", size:20, price:2900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Lê Văn Lương, Xã Nhơn Đức, Huyện Nhà Bè, Hồ Chí Minh"},
+  {id:136, type:"phong-tro", title:"Phòng G011", area:"Nhà Bè", size:20, price:3200000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Lê Văn Lương, Xã Nhơn Đức, Huyện Nhà Bè, Hồ Chí Minh"},
+  {id:137, type:"phong-tro", title:"Phòng 105", area:"Bình Thạnh", size:25, price:5200000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"58/••/•• Phan Chu Trinh, P.25, Bình Thạnh, Hồ Chí Minh"},
+  {id:138, type:"phong-tro", title:"Phòng 504", area:"Bình Thạnh", size:25, price:4900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"58/••/•• Phan Chu Trinh, P.25, Bình Thạnh, Hồ Chí Minh"},
+  {id:139, type:"phong-tro", title:"Phòng 505", area:"Bình Thạnh", size:25, price:5700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"58/••/•• Phan Chu Trinh, P.25, Bình Thạnh, Hồ Chí Minh"},
+  {id:140, type:"phong-tro", title:"Phòng 702", area:"Bình Thạnh", size:25, price:5600000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"58/••/•• Phan Chu Trinh, P.25, Bình Thạnh, Hồ Chí Minh"},
+  {id:141, type:"phong-tro", title:"Phòng 15", area:"Tân Bình", size:20, price:3200000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"15/•• Nguyễn Phúc Chu, P.15, Tân Bình, Hồ Chí Minh"},
+  {id:142, type:"phong-tro", title:"Phòng 103", area:"TP.HCM", size:30, price:5500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Thống Nhất, An Hội Đông, Hồ Chí Minh"},
+  {id:143, type:"phong-tro", title:"Phòng 201", area:"TP.HCM", size:30, price:6000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Thống Nhất, An Hội Đông, Hồ Chí Minh"},
+  {id:144, type:"phong-tro", title:"Phòng 202", area:"TP.HCM", size:35, price:7000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Thống Nhất, An Hội Đông, Hồ Chí Minh"},
+  {id:145, type:"phong-tro", title:"Phòng 502", area:"TP.HCM", size:20, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Thống Nhất, An Hội Đông, Hồ Chí Minh"},
+  {id:146, type:"phong-tro", title:"Phòng 302", area:"Gò Vấp", size:20, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"1122/••/•• Quang Trung, P.8, Gò Vấp, Hồ Chí Minh"},
+  {id:147, type:"phong-tro", title:"Phòng (chưa có mã)", area:"Quận 7", size:18, price:4500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Huỳnh Tấn Phát, Q.7, Hồ Chí Minh"},
+  {id:148, type:"phong-tro", title:"Phòng 302", area:"TP.HCM", size:25, price:5500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nguyễn Văn Mại, Tân Sơn Nhất, Hồ Chí Minh"},
+  {id:149, type:"phong-tro", title:"Phòng A01", area:"Tân Bình", size:20, price:5000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nhất Chi Mai, Tân Bình, Hồ Chí Minh"},
+  {id:150, type:"phong-tro", title:"Phòng G01", area:"TP.HCM", size:20, price:4500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"297/••/•• Phan Huy Ích, An Hội Tây, Hồ Chí Minh"},
+  {id:151, type:"phong-tro", title:"Phòng P04", area:"TP.HCM", size:20, price:3700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Phạm Văn Bạch, Tân Sơn, Hồ Chí Minh"},
+  {id:152, type:"phong-tro", title:"Phòng 106", area:"Gò Vấp", size:18, price:3100000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"332/•• Nguyễn Oanh, Phường 17, Quận Gò Vấp, Hồ Chí Minh"},
+  {id:153, type:"phong-tro", title:"Phòng L01", area:"Quận 7", size:22, price:5500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"861/•• Trần Xuân Soạn, Tân Hưng, Q.7, Hồ Chí Minh"},
+  {id:154, type:"phong-tro", title:"Phòng 202", area:"Tân Bình", size:20, price:4600000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền đường C27, P.13, Tân Bình, Hồ Chí Minh"},
+  {id:155, type:"phong-tro", title:"Phòng 202", area:"Gò Vấp", size:18, price:3000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Nguyễn Văn Lượng, P.10, Gò Vấp, Hồ Chí Minh"},
+  {id:156, type:"phong-tro", title:"Phòng 514", area:"Gò Vấp", size:25, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"799/••/•• Nguyễn Kiệm, P.03, Gò Vấp, Hồ Chí Minh"},
+  {id:157, type:"phong-tro", title:"Phòng 310", area:"Gò Vấp", size:25, price:3800000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"799/••/•• Nguyễn Kiệm, P.03, Gò Vấp, Hồ Chí Minh"},
+  {id:158, type:"phong-tro", title:"Phòng 403", area:"Gò Vấp", size:25, price:3900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"799/••/•• Nguyễn Kiệm, P.03, Gò Vấp, Hồ Chí Minh"},
+  {id:159, type:"phong-tro", title:"Phòng 504", area:"Bình Chánh", size:20, price:5300000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Văn Tiến Dũng, Bình Hưng, Bình Chánh, Hồ Chí Minh"},
+  {id:160, type:"phong-tro", title:"Phòng 410", area:"Bình Chánh", size:18, price:4180000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Văn Tiến Dũng, Bình Hưng, Bình Chánh, Hồ Chí Minh"},
+  {id:161, type:"phong-tro", title:"Phòng 102", area:"Bình Chánh", size:18, price:3895000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Văn Tiến Dũng, Bình Hưng, Bình Chánh, Hồ Chí Minh"},
+  {id:162, type:"phong-tro", title:"Phòng 102", area:"Quận 6", size:15, price:2900000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"671/•• An Dương Vương, Q.6, Hồ Chí Minh"},
+  {id:163, type:"phong-tro", title:"Phòng 203", area:"Quận 7", size:20, price:4700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền đường số 9 KDC Nam Long, Bình Thuận, Q.7, Hồ Chí Minh"},
+  {id:164, type:"phong-tro", title:"Phòng 203", area:"Quận 7", size:0, price:4000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đường Số 7L Tân Thuận Tây, Tân Thuận Tây, Q.7, Hồ Chí Minh"},
+  {id:165, type:"phong-tro", title:"Phòng 202", area:"Quận 7", size:20, price:4700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Huỳnh Tấn Phát, Tân Thuận Tây, Q.7, Hồ Chí Minh"},
+  {id:166, type:"phong-tro", title:"Phòng 305", area:"Bình Thạnh", size:18, price:4500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Vũ Ngọc Phan, P.13, Bình Thạnh, Hồ Chí Minh"},
+  {id:167, type:"phong-tro", title:"Phòng 201", area:"Bình Thạnh", size:20, price:9300000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đinh Bộ Lĩnh, P.26, Bình Thạnh, Hồ Chí Minh"},
+  {id:168, type:"phong-tro", title:"Phòng 303", area:"Bình Thạnh", size:20, price:4300000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Đinh Bộ Lĩnh, P.26, Bình Thạnh, Hồ Chí Minh"},
+  {id:169, type:"phong-tro", title:"Phòng 103", area:"Bình Thạnh", size:20, price:4700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"82/••/•• Đinh Bộ Lĩnh, P.26, Bình Thạnh, Hồ Chí Minh"},
+  {id:170, type:"phong-tro", title:"Phòng 502", area:"Bình Thạnh", size:18, price:4500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"71/•• Chu Văn An, P.26, Bình Thạnh, Hồ Chí Minh"},
+  {id:171, type:"phong-tro", title:"Phòng 102", area:"Phú Nhuận", size:30, price:7300000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"671/•• Nguyễn Kiệm, P.09, Phú Nhuận, Hồ Chí Minh"},
+  {id:172, type:"phong-tro", title:"Phòng T02", area:"Quận 7", size:0, price:3500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"49/•• Phạm Hữu Lầu Phú Mỹ Quận 7, Phú Mỹ, Q.7, Hồ Chí Minh"},
+  {id:173, type:"phong-tro", title:"Phòng D1", area:"TP.HCM", size:20, price:4000000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"87/••/•• Nguyễn Sỹ Sách, Tân Sơn, Hồ Chí Minh"},
+  {id:174, type:"phong-tro", title:"Phòng 203", area:"Quận 7", size:20, price:4500000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"13/•• Đường Số 36, Tân Quy, Q.7, Hồ Chí Minh"},
+  {id:175, type:"phong-tro", title:"Phòng 210", area:"Quận 7", size:20, price:4700000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"13/•• Đường Số 36, Tân Quy, Q.7, Hồ Chí Minh"},
+  {id:176, type:"phong-tro", title:"Phòng P404", area:"Quận 7", size:20, price:4600000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền NGUYỄN THỊ THẬP, Bình Thuận, Q.7, Hồ Chí Minh"},
+  {id:177, type:"phong-tro", title:"Phòng 05", area:"Bình Trị Đông", size:15, price:2400000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"413/•• Lê Văn Quới, Bình Trị Đông, Hồ Chí Minh"},
+  {id:178, type:"phong-tro", title:"Phòng 104", area:"TP.HCM", size:20, price:4300000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Lương Minh Nguyệt, Phú Thạnh, Hồ Chí Minh"},
+  {id:179, type:"phong-tro", title:"Phòng 103", area:"TP.HCM", size:20, price:4100000, status:"con", added:"2026-11-22", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"Mặt tiền Lương Minh Nguyệt, Phú Thạnh, Hồ Chí Minh"}
+];
+var LISTINGS = LISTINGS_ALL.filter(function(l){ return l.rooms && l.rooms !== "1 phòng" && l.size; });
+
+var state = {tab:"all"};
+var amenSel = {};
+document.getElementById("amenBar").addEventListener("click", function(e){
+  var b = e.target.closest(".amen-chip"); if (!b) return;
+  var k = b.getAttribute("data-amen");
+  if (amenSel[k]) { delete amenSel[k]; } else { amenSel[k] = true; }
+  b.classList.toggle("on", !!amenSel[k]);
+  render();
+});
+var fmt = function(n){ return n.toLocaleString("vi-VN") + " đ/tháng"; };
+
+// Điền danh sách khu vực từ dữ liệu
+(function fillAreas(){
+  var sel = document.getElementById("fArea");
+  var areas = [];
+  LISTINGS.forEach(function(l){ if(areas.indexOf(l.area) < 0) areas.push(l.area); });
+  areas.forEach(function(a){ var o=document.createElement("option"); o.value=a; o.textContent=a; sel.appendChild(o); });
+})();
+
+function getFiltered(){
+  var type = state.tab !== "all" ? state.tab : document.getElementById("fType").value;
+  var area = document.getElementById("fArea").value;
+  var maxPrice = parseInt(document.getElementById("fPrice").value || "0", 10);
+  var minSize = parseInt(document.getElementById("fSize").value || "0", 10);
+  var status = document.getElementById("fStatus").value;
+  var sort = document.getElementById("sort").value;
+  var wantAmen = Object.keys(amenSel);
+
+  var list = LISTINGS.filter(function(l){
+    if (type && l.type !== type) return false;
+    if (wantAmen.length && !wantAmen.every(function(a){ return (l.amen||[]).indexOf(a) > -1; })) return false;
+    if (area && l.area !== area) return false;
+    if (maxPrice && l.price > maxPrice) return false;
+    if (minSize && l.size < minSize) return false;
+    if (status && l.status !== status) return false;
+    return true;
+  });
+
+  list.sort(function(a,b){
+    if (sort === "priceAsc") return a.price - b.price;
+    if (sort === "priceDesc") return b.price - a.price;
+    if (sort === "sizeDesc") return b.size - a.size;
+    return b.added < a.added ? -1 : 1; // mới đăng
+  });
+  return list;
+}
+
+function card(l){
+  var img = l.img ? '<img src="'+l.img+'" alt="'+l.title+'" loading="lazy">' : '<span class="ph-text">[Ảnh phòng]</span>';
+  var type = l.type === "can-ho" ? "Căn hộ" : (l.type === "mat-bang" ? "Mặt bằng" : "Phòng trọ");
+  var status = l.status === "con" ? '<span class="st-pill ok">Còn trống</span>' : '<span class="st-pill gone">Đã thuê</span>';
+  var rooms = l.rooms ? l.rooms.replace(" phòng ngủ","PN").replace(" phòng","P") : type;
+  if (l.size) rooms += " · " + l.size + " m²";
+  var amen = (l.amen||[]).slice(0,3).map(function(a){ return '<span class="ic">'+a+'</span>'; }).join("");
+  var more = (l.amen||[]).length > 3 ? '<span class="more">+'+((l.amen.length)-3)+' tiện ích</span>' : '';
+  return '<article class="card" onclick="openDetail('+l.id+')">' +
+    '<div class="pic">'+img+'<span class="type-tag">'+type+'</span>'+status+'</div>' +
+    '<div class="body">' +
+      '<div class="row1"><span class="chip">'+rooms+'</span><span class="price">'+fmt(l.price)+'<small> đ/tháng</small></span></div>' +
+      '<div class="addr">'+(l.address||l.area)+'</div>' +
+      ((l.amen||[]).length ? '<div class="amen">'+amen+more+'</div>' : '') +
+    '</div>' +
+    '<div class="card-actions">' +
+      '<button class="detail-btn ghost" onclick="event.stopPropagation();openDetail('+l.id+')">Xem chi tiết</button>' +
+      (l.status==="con" ? '<button class="detail-btn" onclick="event.stopPropagation();openModal('+l.id+')">Đặt lịch</button>' : '<button class="detail-btn" disabled>Đã thuê</button>') +
+    '</div>' +
+  '</article>';
+}
+
+function render(){
+  var list = getFiltered();
+  document.getElementById("grid").innerHTML = list.length
+    ? list.map(card).join("")
+    : '<div class="empty">Không có phòng nào khớp bộ lọc. Anh/chị thử bỏ bớt điều kiện hoặc gọi 0978 07 16 01.</div>';
+  document.getElementById("count").textContent = list.length + " phòng";
+}
+
+// Tab nhanh
+document.querySelectorAll(".tab").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    state.tab = btn.getAttribute("data-tab");
+    document.querySelectorAll(".tab").forEach(function(b){ b.classList.toggle("on", b===btn); });
+    document.getElementById("fType").value = "";
+    render();
+  });
+});
+// Bộ lọc và sắp xếp
+["fType","fArea","fPrice","fSize","fStatus","sort"].forEach(function(id){
+  document.getElementById(id).addEventListener("change", function(){
+    if (id === "fType") { state.tab = "all"; document.querySelectorAll(".tab").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-tab")==="all"); }); }
+    render();
+  });
+});
+document.getElementById("resetBtn").addEventListener("click", function(){
+  ["fType","fArea","fPrice","fSize","fStatus"].forEach(function(id){ document.getElementById(id).value = ""; });
+  state.tab = "all";
+  amenSel = {};
+  document.querySelectorAll(".amen-chip").forEach(function(b){ b.classList.remove("on"); });
+  document.querySelectorAll(".tab").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-tab")==="all"); });
+  render();
+});
+
+// Đặt lịch xem
+var currentId = null;
+function openModal(id){
+  currentId = id;
+  var l = LISTINGS.filter(function(x){ return x.id===id; })[0];
+  document.getElementById("modalTitle").innerHTML = l ? l.title + " · " + l.area + "<br>" + l.address : "";
+  document.getElementById("viewLabel").textContent = (l && l.type === "can-ho") ? "Ngày giờ xem căn hộ" : (l && l.type === "mat-bang" ? "Ngày giờ xem mặt bằng" : "Ngày giờ xem phòng");
+  document.getElementById("modal").classList.add("open");
+}
+function closeModal(){ document.getElementById("modal").classList.remove("open"); }
+
+document.getElementById("bookForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var f = new FormData(this);
+  var l = LISTINGS.filter(function(x){ return x.id===currentId; })[0];
+  var subject = "Đặt lịch xem: " + (l ? l.title : "phòng");
+  var body = "Họ tên: " + f.get("name") + "\n" +
+             "Số điện thoại/Zalo: " + f.get("phone") + "\n" +
+             (l && l.type === "can-ho" ? "Ngày giờ xem căn hộ: " : (l && l.type === "mat-bang" ? "Ngày giờ xem mặt bằng: " : "Ngày giờ xem phòng: ")) + f.get("viewing") + "\n" +
+             "Phòng: " + (l ? l.title + " - " + l.area : "") + "\n" +
+             "Địa chỉ: " + (l ? l.address : "") + "\n" +
+             "Ghi chú: " + (f.get("note") || "không");
+  // Chưa có máy chủ nhận đơn nên mở email đã điền sẵn, khách bấm gửi là xong
+  window.location.href = "mailto:luuvoducanh9a6@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  closeModal();
+  this.reset();
+});
+
+// ===== BẢNG CHI TIẾT =====
+
+function gallery(l){
+  var list = l.imgs && l.imgs.length ? l.imgs : (l.img ? [l.img] : []);
+  currentPhotos = list;
+  if(!list.length) return '<div class="d-photos"><div class="big">[Ảnh chính]</div></div>';
+  var main = '<div class="d-photos"><div class="big" onclick="openLightbox(0)" role="button" tabindex="0"><img src="'+list[0]+'" alt="Ảnh 1"></div>';
+  var rest = list.slice(1,5).map(function(src,i){
+    var idx = i+1;
+    var more = (i===3 && list.length>5) ? '<span class="more-ph">+'+(list.length-5)+'</span>' : '';
+    return '<div onclick="openLightbox('+idx+')" role="button" tabindex="0"><img src="'+src+'" alt="Ảnh '+(idx+1)+'">'+more+'</div>';
+  }).join("");
+  return main + rest + '</div>';
+}
+var currentPhotos = [], lbIndex = 0;
+function openLightbox(i){
+  lbIndex = i;
+  drawLightbox();
+  document.getElementById("lightbox").classList.add("open");
+}
+function drawLightbox(){
+  var n = currentPhotos.length;
+  document.getElementById("lbImg").src = currentPhotos[lbIndex];
+  document.getElementById("lbCount").textContent = (lbIndex+1)+" / "+n;
+  document.getElementById("lbPrev").style.display = n>1 ? "" : "none";
+  document.getElementById("lbNext").style.display = n>1 ? "" : "none";
+}
+function lbStep(d){
+  lbIndex = (lbIndex + d + currentPhotos.length) % currentPhotos.length;
+  drawLightbox();
+}
+function closeLightbox(){
+  document.getElementById("lightbox").classList.remove("open");
+}
+function findListing(id){ return LISTINGS.filter(function(x){ return x.id===id; })[0]; }
+function openDetail(id){
+  var l = findListing(id); if(!l) return;
+  var money = function(n){ return n.toLocaleString("vi-VN") + " đ"; };
+  document.getElementById("dTitle").textContent = "Chi tiết phòng";
+  var tag = l.status === "con" ? '<span class="d-tag con">Còn trống</span>' : '<span class="d-tag het">Đã thuê</span>';
+  var fees = (l.fees||[]).map(function(f){ return '<div class="d-fee"><span>'+f[0]+'</span><span>'+f[1]+'</span></div>'; }).join("");
+  var amen = (l.amen||[]).map(function(a){ return '<li>'+a+'</li>'; }).join("");
+  document.getElementById("dBody").innerHTML =
+    gallery(l) +
+    '<div class="d-title">'+l.title+'</div>' +
+    '<div class="d-price">'+money(l.price)+' <small>/tháng</small></div>' +
+    tag +
+    '<div class="d-sec"><h4>Thông tin chính</h4><div class="d-grid">' +
+      '<div><span>Địa chỉ</span><b>'+(l.address||l.area)+'</b></div>' +
+      '<div><span>Loại</span><b>'+(l.type==="can-ho"?"Căn hộ":(l.type==="mat-bang"?"Mặt bằng":"Phòng trọ"))+'</b></div>' +
+      '<div><span>Diện tích</span><b>'+(l.size?l.size+' m²':'[cập nhật]')+'</b></div>' +
+      '<div><span>Tiền cọc</span><b>'+(l.deposit?money(l.deposit):'[cập nhật]')+'</b></div>' +
+    '</div></div>' +
+    '<div class="d-sec"><h4>Chi tiết</h4><div class="d-grid">' +
+      '<div><span>Loại phòng</span><b>'+(l.rooms||"[cập nhật]")+'</b></div>' +
+      '<div><span>Tầng</span><b>'+(l.floor||"[cập nhật]")+'</b></div>' +
+      '<div><span>Số người</span><b>'+(l.people||"[cập nhật]")+'</b></div>' +
+      '<div><span>Toilet</span><b>'+(l.toilet||"[cập nhật]")+'</b></div>' +
+      '<div><span>Khóa cửa</span><b>'+(l.lock||"[cập nhật]")+'</b></div>' +
+      '<div><span>Giờ hoạt động</span><b>'+(l.hours||"[cập nhật]")+'</b></div>' +
+      '<div><span>Số lượng xe</span><b>'+(l.parking||"[cập nhật]")+'</b></div>' +
+    '</div></div>' +
+    '<div class="d-sec"><h4>Trang bị</h4><ul class="d-list">'+(amen||'<li>[cập nhật]</li>')+'</ul></div>' +
+    '<div class="d-sec"><h4>Phí dịch vụ</h4>'+(fees||'<div class="d-fee"><span>[cập nhật]</span><span></span></div>')+'</div>';
+  document.getElementById("dFoot").innerHTML =
+    '<a href="tel:0978071601">Gọi</a>' +
+    '<a href="https://zalo.me/0978071601">Zalo</a>' +
+    '';
+  var bk = document.getElementById("dBook");
+  if (l.status==="con") { bk.style.display=""; bk.onclick=function(){ closeDetail(); openModal(l.id); }; }
+  else { bk.style.display="none"; }
+  document.getElementById("drawer").classList.add("open");
+  document.getElementById("drawerBg").classList.add("open");
+  document.getElementById("dBody").scrollTop = 0;
+}
+function closeDetail(){
+  document.getElementById("drawer").classList.remove("open");
+  document.getElementById("drawerBg").classList.remove("open");
+}
+document.addEventListener("keydown", function(e){
+  var lb = document.getElementById("lightbox").classList.contains("open");
+  if (e.key === "Escape") { if (lb) closeLightbox(); else closeDetail(); }
+  if (lb && e.key === "ArrowLeft") lbStep(-1);
+  if (lb && e.key === "ArrowRight") lbStep(1);
+});
+
+
+// Số liệu đầu trang lấy từ danh sách phòng
+(function(){
+  var free = LISTINGS.filter(function(l){ return l.status === "con"; });
+  document.getElementById("hsCount").textContent = free.length;
+  if (free.length) {
+    var min = Math.min.apply(null, free.map(function(l){ return l.price; }));
+    document.getElementById("hsMin").textContent = (min/1000000).toLocaleString("vi-VN",{maximumFractionDigits:1}) + " triệu";
+    var areas = {}; free.forEach(function(l){ areas[l.area] = 1; });
+    document.getElementById("hsArea").textContent = Object.keys(areas).length;
+  }
+})();
+
+render();
+</script>
+</body>
+</html>

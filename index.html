@@ -530,14 +530,14 @@ function getFiltered(){
 
 function card(l){
   var img = l.img ? '<img src="'+l.img+'" alt="'+l.title+'" loading="lazy">' : '<span class="ph-text">[Ảnh phòng]</span>';
-  var type = l.loai || (l.type === "can-ho" ? "Căn hộ" : (l.type === "mat-bang" ? "Mặt bằng" : "Phòng trọ"));
+  var type = l.loai ? "" : (l.type === "can-ho" ? "Căn hộ" : (l.type === "mat-bang" ? "Mặt bằng" : "Phòng trọ"));
   var status = l.status === "con" ? '<span class="st-pill ok">'+(l.trangThai||"Còn trống")+'</span>' : '<span class="st-pill gone">Đã thuê</span>';
-  var rooms = l.rooms ? l.rooms.replace(" phòng ngủ","PN").replace(" phòng","P") : type;
+  var rooms = l.loai ? "Phòng" : (l.rooms ? l.rooms.replace(" phòng ngủ","PN").replace(" phòng","P") : type);
   if (l.size) rooms += " · " + l.size + " m²";
   var amen = (l.amen||[]).slice(0,3).map(function(a){ return '<span class="ic">'+a+'</span>'; }).join("");
   var more = (l.amen||[]).length > 3 ? '<span class="more">+'+((l.amen.length)-3)+' tiện ích</span>' : '';
   return '<article class="card" onclick="openDetail('+l.id+')">' +
-    '<div class="pic">'+img+'<span class="type-tag">'+type+'</span>'+status+'</div>' +
+    '<div class="pic">'+img+(type ? '<span class="type-tag">'+type+'</span>' : '')+status+'</div>' +
     '<div class="body">' +
       '<div class="row1"><span class="chip">'+rooms+'</span><span class="price">'+l.price.toLocaleString("vi-VN")+'<small> đ/tháng</small></span></div>' +
       '<div class="addr">'+(l.address||l.area)+'</div>' +

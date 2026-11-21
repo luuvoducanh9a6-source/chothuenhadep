@@ -541,7 +541,7 @@ function card(l){
   return '<article class="card" onclick="openDetail('+l.id+')">' +
     '<div class="pic">'+img+'<span class="type-tag">'+type+'</span>'+status+'</div>' +
     '<div class="body">' +
-      '<div class="row1"><span class="chip">'+rooms+'</span><span class="price">'+fmt(l.price)+'<small> đ/tháng</small></span></div>' +
+      '<div class="row1"><span class="chip">'+rooms+'</span><span class="price">'+l.price.toLocaleString("vi-VN")+'<small> đ/tháng</small></span></div>' +
       '<div class="addr">'+(l.address||l.area)+'</div>' +
       ((l.amen||[]).length ? '<div class="amen">'+amen+more+'</div>' : '') +
     '</div>' +

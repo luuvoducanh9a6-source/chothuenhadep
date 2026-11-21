@@ -364,10 +364,22 @@
 // Mỗi phòng là một dòng. Thêm phòng mới bằng cách copy một dòng và sửa dữ liệu.
 // type: "can-ho" hoặc "phong-tro"; status: "con" (còn trống) hoặc "het" (đã thuê)
 var LISTINGS_ALL = [
+  {id:2001, type:"phong-tro", title:"Phòng 07", area:"Tân Phú", size:20, price:3200000, deposit:3200000, status:"con", added:"2026-11-22", img:"photos/l2001/01.jpg",
+   imgs:["photos/l2001/01.jpg","photos/l2001/02.jpg","photos/l2001/03.jpg","photos/l2001/04.jpg","photos/l2001/05.jpg"],
+   amen:["Điều hòa","Máy giặt","Kệ bếp","Cửa sổ","Để xe: Chung","Sân phơi: Chung","Thú cưng","An ninh","Gác lửng"],
+   floor:"Tầng 1", rooms:"Duplex", people:"2 người", toilet:"Chung", lock:"Vân tay", hours:"Tự do", parking:"2 xe", fees:[["Điện","3.900 VNĐ/kWh"],["Nước","20.000 VNĐ/m³"],["Quản lý","150.000 VNĐ/Phòng"],["Gửi xe","50.000 VNĐ/Xe"]], address:"149/•• Lý Thánh Tông, Tân Thới Hòa, Tân Phú, Hồ Chí Minh"},
+  {id:2002, type:"phong-tro", title:"Phòng 208", area:"Tân Phú", size:20, price:3200000, deposit:3200000, status:"con", added:"2026-11-22", img:"photos/l2002/01.jpeg",
+   imgs:["photos/l2002/01.jpeg","photos/l2002/02.jpeg","photos/l2002/03.jpeg","photos/l2002/04.jpeg"],
+   amen:["Điều hòa","Máy giặt","Kệ bếp","Để xe: Chung","Sân phơi: Chung","Gác lửng","Bồn rửa chén"],
+   floor:"Tầng 2", rooms:"Gác", people:"2 người", toilet:"Riêng", lock:"Vân tay", hours:"Tự do", parking:"2 xe", fees:[["Điện","3.900 VNĐ/kWh"],["Nước","30.000 VNĐ/m³"],["Quản lý","150.000 VNĐ/Phòng"],["Gửi xe","50.000 VNĐ/Xe"]], address:"58/•• Hoa Bằng, Tân Sơn Nhì, Tân Phú, Hồ Chí Minh"},
+  {id:2003, type:"can-ho", title:"Căn hộ 02", area:"Quận 7", size:20, price:3700000, deposit:3700000, status:"con", added:"2026-11-22", img:"photos/l2003/01.jpg",
+   imgs:["photos/l2003/01.jpg","photos/l2003/02.jpg","photos/l2003/03.jpg","photos/l2003/04.jpg","photos/l2003/05.jpg"],
+   amen:["Nước nóng","Máy giặt","Kệ bếp","Để xe: Nhà xe","Sân phơi: Chung","Giếng trời","Bồn rửa chén"],
+   floor:"Tầng trệt", rooms:"Studio", people:"3 người", toilet:"Riêng", lock:"Vân tay", hours:"Tự do", parking:"2 xe", fees:[["Điện","3.500 VNĐ/kWh"],["Nước","100.000 VNĐ/Người"],["Quản lý","170.000 VNĐ/Phòng"]], address:"Mặt tiền Đường Số 2 KDC Tân Thành Lập, Phú Mỹ, Q.7, Hồ Chí Minh"},
   {id:4, type:"can-ho", title:"Căn hộ 2 phòng ngủ", area:"Quận 10", size:0, price:8200000, deposit:8200000, status:"con", added:"2026-11-21", img:"photos/p1.jpg",
    imgs:["photos/p1.jpg","photos/p2.jpg","photos/p3.jpg","photos/p4.jpg","photos/p5.jpg","photos/p6.jpg","photos/p7.jpg","photos/p8.jpg","photos/p9.jpg"],
    amen:["Điều hòa","Nước nóng","Tủ lạnh","Máy giặt","Tủ quần áo","Giường","Nệm","Kệ bếp","Ban công","Cửa sổ","Để xe (chung)","Sân phơi (chung)","Bồn rửa chén"],
-   floor:"Tầng 1", rooms:"2 phòng ngủ", people:"2 người", toilet:"Riêng", lock:"Vân tay", hours:"Tự do", parking:"3 xe", fees:[["Điện","4.000 đ/kWh"],["Nước","100.000 đ/người"],["Quản lý","200.000 đ/phòng"]], address:"38/•• Nguyễn Giãn Thanh, Phường 15, Quận 10, Thành phố Hồ Chí Minh"},,
+   floor:"Tầng 1", rooms:"2 phòng ngủ", people:"2 người", toilet:"Riêng", lock:"Vân tay", hours:"Tự do", parking:"3 xe", fees:[["Điện","4.000 đ/kWh"],["Nước","100.000 đ/người"],["Quản lý","200.000 đ/phòng"]], address:"38/•• Nguyễn Giãn Thanh, Phường 15, Quận 10, Thành phố Hồ Chí Minh"},
   {id:5, type:"phong-tro", title:"Phòng 07", area:"Tân Phú", size:20, price:3200000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"149/•• Lý Thánh Tông, Tân Thới Hòa, Tân Phú, Hồ Chí Minh"},
   {id:6, type:"phong-tro", title:"Phòng 208", area:"Tân Phú", size:20, price:3200000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"58/•• Hoa Bằng, Tân Sơn Nhì, Tân Phú, Hồ Chí Minh"},
   {id:7, type:"phong-tro", title:"Phòng 101", area:"Bình Tân", size:20, price:2200000, status:"con", added:"2026-11-21", img:"", imgs:[], amen:[], floor:"[cập nhật]", rooms:"1 phòng", people:"[cập nhật]", toilet:"[cập nhật]", lock:"[cập nhật]", hours:"[cập nhật]", parking:"[cập nhật]", fees:[], address:"413/•• Lê Văn Quới, Bình Trị Đông, Hồ Chí Minh"},

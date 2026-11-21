@@ -262,8 +262,8 @@
 <div class="wrap">
   <div class="filters">
     <form id="filterForm" onsubmit="return false">
-      <div class="field"><label for="fType">Loại</label>
-        <select id="fType"><option value="">Tất cả</option><option value="can-ho">Căn hộ</option><option value="phong-tro">Phòng trọ</option><option value="mat-bang">Mặt bằng</option></select></div>
+      <div class="field"><label for="fType">Loại phòng</label>
+        <select id="fType"><option value="">Tất cả</option><option value="Duplex">Duplex</option><option value="Gác">Gác</option><option value="Studio">Studio</option></select></div>
       <div class="field"><label for="fArea">Khu vực</label>
         <select id="fArea"><option value="">Tất cả khu vực</option></select></div>
       <div class="field"><label for="fPrice">Giá tối đa</label>
@@ -274,15 +274,13 @@
         <select id="fStatus"><option value="">Tất cả</option><option value="con">Trống</option><option value="het">Đã thuê</option></select></div>
       <button class="btn" id="resetBtn" type="button" style="background:var(--card);color:var(--main);border:1.5px solid var(--main)">Xóa lọc</button>
     </form>
-    <div class="amen-bar" id="amenBar"><button type="button" class="amen-chip" data-amen="Điều hòa">Điều hòa</button><button type="button" class="amen-chip" data-amen="Máy nước nóng">Máy nước nóng</button><button type="button" class="amen-chip" data-amen="Tủ lạnh">Tủ lạnh</button><button type="button" class="amen-chip" data-amen="Máy giặt">Máy giặt</button><button type="button" class="amen-chip" data-amen="Tivi">Tivi</button><button type="button" class="amen-chip" data-amen="Tủ quần áo">Tủ quần áo</button><button type="button" class="amen-chip" data-amen="Giường">Giường</button><button type="button" class="amen-chip" data-amen="Nệm">Nệm</button><button type="button" class="amen-chip" data-amen="Cửa sổ">Cửa sổ</button><button type="button" class="amen-chip" data-amen="Ban công">Ban công</button><button type="button" class="amen-chip" data-amen="Thang máy">Thang máy</button><button type="button" class="amen-chip" data-amen="Thú cưng">Thú cưng</button><button type="button" class="amen-chip" data-amen="Giếng trời">Giếng trời</button><button type="button" class="amen-chip" data-amen="Kệ bếp">Kệ bếp</button><button type="button" class="amen-chip" data-amen="Xe điện">Xe điện</button><button type="button" class="amen-chip" data-amen="An ninh">An ninh</button><button type="button" class="amen-chip" data-amen="Chủ ở chung">Chủ ở chung</button><button type="button" class="amen-chip" data-amen="Gác lửng">Gác lửng</button><button type="button" class="amen-chip" data-amen="Bồn rửa chén">Bồn rửa chén</button></div>
+    <div class="amen-bar" id="amenBar"><button type="button" class="amen-chip" data-amen="Điều hòa">Điều hòa</button><button type="button" class="amen-chip" data-amen="Nước nóng">Nước nóng</button><button type="button" class="amen-chip" data-amen="Tủ lạnh">Tủ lạnh</button><button type="button" class="amen-chip" data-amen="Máy giặt">Máy giặt</button><button type="button" class="amen-chip" data-amen="Tivi">Tivi</button><button type="button" class="amen-chip" data-amen="Tủ quần áo">Tủ quần áo</button><button type="button" class="amen-chip" data-amen="Giường">Giường</button><button type="button" class="amen-chip" data-amen="Nệm">Nệm</button><button type="button" class="amen-chip" data-amen="Cửa sổ">Cửa sổ</button><button type="button" class="amen-chip" data-amen="Ban công">Ban công</button><button type="button" class="amen-chip" data-amen="Thang máy">Thang máy</button><button type="button" class="amen-chip" data-amen="Thú cưng">Thú cưng</button><button type="button" class="amen-chip" data-amen="Giếng trời">Giếng trời</button><button type="button" class="amen-chip" data-amen="Kệ bếp">Kệ bếp</button><button type="button" class="amen-chip" data-amen="Xe điện">Xe điện</button><button type="button" class="amen-chip" data-amen="An ninh">An ninh</button><button type="button" class="amen-chip" data-amen="Chủ ở chung">Chủ ở chung</button><button type="button" class="amen-chip" data-amen="Gác lửng">Gác lửng</button><button type="button" class="amen-chip" data-amen="Bồn rửa chén">Bồn rửa chén</button></div>
   </div>
 
   <div class="toolbar">
     <div>
       <div class="tabs" id="tabs">
         <button class="tab on" data-tab="all">Tất cả</button>
-        <button class="tab" data-tab="can-ho">Căn hộ</button>
-        <button class="tab" data-tab="phong-tro">Phòng trọ</button>
       </div>
     </div>
     <div style="display:flex;gap:10px;align-items:center">
@@ -364,15 +362,15 @@
 // Mỗi phòng là một dòng. Thêm phòng mới bằng cách copy một dòng và sửa dữ liệu.
 // type: "can-ho" hoặc "phong-tro"; status: "con" (còn trống) hoặc "het" (đã thuê)
 var LISTINGS_ALL = [
-  {id:2001, type:"phong-tro", title:"07", loai:"Phòng/Căn hộ", trangThai:"Trống", area:"Tân Phú", size:20, price:3200000, deposit:3200000, status:"con", added:"2026-11-22", img:"photos/l2001/01.jpg",
+  {id:2001, diaChiChiTiet:"Tân Thới Hòa, Tân Phú, Hồ Chí Minh", type:"phong-tro", title:"07", loai:"Phòng/Căn hộ", trangThai:"Trống", area:"Tân Phú", size:20, price:3200000, deposit:3200000, status:"con", added:"2026-11-22", img:"photos/l2001/01.jpg",
    imgs:["photos/l2001/01.jpg","photos/l2001/02.jpg","photos/l2001/03.jpg","photos/l2001/04.jpg","photos/l2001/05.jpg"],
    amen:["Điều hòa","Máy giặt","Kệ bếp","Cửa sổ","Để xe: Chung","Sân phơi: Chung","Thú cưng","An ninh","Gác lửng"],
    floor:"Tầng 1", rooms:"Duplex", people:"2 người", toilet:"Chung", lock:"Vân tay", hours:"Tự do", parking:"2 xe", fees:[["Điện","3.900 VNĐ/kWh"],["Nước","20.000 VNĐ/m³"],["Quản lý","150.000 VNĐ/Phòng"],["Gửi xe","50.000 VNĐ/Xe"]], address:"149/•• Lý Thánh Tông, Tân Thới Hòa, Tân Phú, Hồ Chí Minh"},
-  {id:2002, type:"phong-tro", title:"208", loai:"Phòng/Căn hộ", trangThai:"Trống", area:"Tân Phú", size:20, price:3200000, deposit:3200000, status:"con", added:"2026-11-22", img:"photos/l2002/01.jpeg",
+  {id:2002, diaChiChiTiet:"Tân Sơn Nhì, Tân Phú, Hồ Chí Minh", type:"phong-tro", title:"208", loai:"Phòng/Căn hộ", trangThai:"Trống", area:"Tân Phú", size:20, price:3200000, deposit:3200000, status:"con", added:"2026-11-22", img:"photos/l2002/01.jpeg",
    imgs:["photos/l2002/01.jpeg","photos/l2002/02.jpeg","photos/l2002/03.jpeg","photos/l2002/04.jpeg"],
    amen:["Điều hòa","Máy giặt","Kệ bếp","Để xe: Chung","Sân phơi: Chung","Gác lửng","Bồn rửa chén"],
    floor:"Tầng 2", rooms:"Gác", people:"2 người", toilet:"Riêng", lock:"Vân tay", hours:"Tự do", parking:"2 xe", fees:[["Điện","3.900 VNĐ/kWh"],["Nước","30.000 VNĐ/m³"],["Quản lý","150.000 VNĐ/Phòng"],["Gửi xe","50.000 VNĐ/Xe"]], address:"58/•• Hoa Bằng, Tân Sơn Nhì, Tân Phú, Hồ Chí Minh"},
-  {id:2003, type:"can-ho", title:"02", loai:"Phòng/Căn hộ", trangThai:"Trống", area:"Quận 7", size:20, price:3700000, deposit:3700000, status:"con", added:"2026-11-22", img:"photos/l2003/01.jpg",
+  {id:2003, diaChiChiTiet:"Phú Mỹ, Q.7, Hồ Chí Minh", type:"can-ho", title:"02", loai:"Phòng/Căn hộ", trangThai:"Trống", area:"Q.7", size:20, price:3700000, deposit:3700000, status:"con", added:"2026-11-22", img:"photos/l2003/01.jpg",
    imgs:["photos/l2003/01.jpg","photos/l2003/02.jpg","photos/l2003/03.jpg","photos/l2003/04.jpg","photos/l2003/05.jpg"],
    amen:["Nước nóng","Máy giặt","Kệ bếp","Để xe: Nhà xe","Sân phơi: Chung","Giếng trời","Bồn rửa chén"],
    floor:"Tầng trệt", rooms:"Studio", people:"3 người", toilet:"Riêng", lock:"Vân tay", hours:"Tự do", parking:"2 xe", fees:[["Điện","3.500 VNĐ/kWh"],["Nước","100.000 VNĐ/Người"],["Quản lý","170.000 VNĐ/Phòng"]], address:"Mặt tiền Đường Số 2 KDC Tân Thành Lập, Phú Mỹ, Q.7, Hồ Chí Minh"},
@@ -503,7 +501,7 @@ var fmt = function(n){ return n.toLocaleString("vi-VN") + " đ/tháng"; };
 })();
 
 function getFiltered(){
-  var type = state.tab !== "all" ? state.tab : document.getElementById("fType").value;
+  var type = document.getElementById("fType").value;
   var area = document.getElementById("fArea").value;
   var maxPrice = parseInt(document.getElementById("fPrice").value || "0", 10);
   var minSize = parseInt(document.getElementById("fSize").value || "0", 10);
@@ -512,7 +510,7 @@ function getFiltered(){
   var wantAmen = Object.keys(amenSel);
 
   var list = LISTINGS.filter(function(l){
-    if (type && l.type !== type) return false;
+    if (type && l.rooms !== type) return false;
     if (wantAmen.length && !wantAmen.every(function(a){ return (l.amen||[]).indexOf(a) > -1; })) return false;
     if (area && l.area !== area) return false;
     if (maxPrice && l.price > maxPrice) return false;
@@ -591,7 +589,7 @@ function openModal(id){
   currentId = id;
   var l = LISTINGS.filter(function(x){ return x.id===id; })[0];
   document.getElementById("modalTitle").innerHTML = l ? l.title + " · " + l.area + "<br>" + l.address : "";
-  document.getElementById("viewLabel").textContent = (l && l.type === "can-ho") ? "Ngày giờ xem căn hộ" : (l && l.type === "mat-bang" ? "Ngày giờ xem mặt bằng" : "Ngày giờ xem phòng");
+  document.getElementById("viewLabel").textContent = "Ngày giờ xem phòng";
   document.getElementById("modal").classList.add("open");
 }
 function closeModal(){ document.getElementById("modal").classList.remove("open"); }
@@ -603,7 +601,7 @@ document.getElementById("bookForm").addEventListener("submit", function(e){
   var subject = "Đặt lịch xem: " + (l ? l.title : "phòng");
   var body = "Họ tên: " + f.get("name") + "\n" +
              "Số điện thoại/Zalo: " + f.get("phone") + "\n" +
-             (l && l.type === "can-ho" ? "Ngày giờ xem căn hộ: " : (l && l.type === "mat-bang" ? "Ngày giờ xem mặt bằng: " : "Ngày giờ xem phòng: ")) + f.get("viewing") + "\n" +
+             "Ngày giờ xem phòng: " + f.get("viewing") + "\n" +
              "Phòng: " + (l ? l.title + " - " + l.area : "") + "\n" +
              "Địa chỉ: " + (l ? l.address : "") + "\n" +
              "Ghi chú: " + (f.get("note") || "không");
@@ -661,7 +659,7 @@ function openDetail(id){
     '<div class="d-price">'+money(l.price)+' <small>/tháng</small></div>' +
     tag +
     '<div class="d-sec"><h4>Thông tin chính</h4><div class="d-grid">' +
-      '<div><span>Địa chỉ</span><b>'+(l.address||l.area)+'</b></div>' +
+      '<div><span>Địa chỉ</span><b>'+(l.diaChiChiTiet||l.address||l.area)+'</b></div>' +
       '<div><span>Loại</span><b>'+(l.loai||(l.type==="can-ho"?"Căn hộ":(l.type==="mat-bang"?"Mặt bằng":"Phòng trọ")))+'</b></div>' +
       '<div><span>Diện tích</span><b>'+(l.size?l.size+' m²':'[cập nhật]')+'</b></div>' +
       '<div><span>Tiền cọc</span><b>'+(l.deposit?money(l.deposit):'[cập nhật]')+'</b></div>' +

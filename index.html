@@ -539,19 +539,54 @@ function closeModal(){ if (topName() === "modal") navClose(); }
 
 document.getElementById("bookForm").addEventListener("submit", function(e){
   e.preventDefault();
-  var f = new FormData(this);
+  var form = this;
+  var f = new FormData(form);
   var l = findListing(currentId);
   var subject = "Đặt lịch xem: " + (l ? (l.title || l.address || "phòng") : "phòng");
-  var body = "Họ tên: " + f.get("name") + "\n" +
-             "Số điện thoại/Zalo: " + f.get("phone") + "\n" +
-             "Ngày giờ xem phòng: " + f.get("viewing") + "\n" +
-             "Phòng: " + (l ? [l.title, l.area].filter(Boolean).join(" - ") : "") + "\n" +
-             "Địa chỉ: " + (l ? (l.address || "") : "") + "\n" +
-             "Ghi chú: " + (f.get("note") || "không");
-  // Chưa có máy chủ nhận đơn nên mở email đã điền sẵn, khách bấm gửi là xong
-  window.location.href = "mailto:luuvoducanh9a6@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-  closeModal();
-  this.reset();
+  var room = l ? [l.title, l.area].filter(Boolean).join(" - ") : "";
+  var address = l ? (l.address || "") : "";
+  var note = f.get("note") || "không";
+  var btn = form.querySelector('button[type="submit"]');
+  if (btn) btn.disabled = true;
+  function done(){
+    if (btn) btn.disabled = false;
+    closeModal();
+    form.reset();
+  }
+  // Dự phòng: mở email đã điền sẵn nếu không gửi trực tiếp được
+  function byMail(){
+    var body = "Họ tên: " + f.get("name") + "\n" +
+               "Số điện thoại/Zalo: " + f.get("phone") + "\n" +
+               "Ngày giờ xem phòng: " + f.get("viewing") + "\n" +
+               "Phòng: " + room + "\n" +
+               "Địa chỉ: " + address + "\n" +
+               "Ghi chú: " + note;
+    window.location.href = "mailto:luuvoducanh9a6@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    done();
+  }
+  // Gửi thẳng về Gmail của chủ nhà qua FormSubmit, khách không phải làm thêm bước nào
+  fetch("https://formsubmit.co/ajax/luuvoducanh9a6@gmail.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify({
+      _subject: subject,
+      _template: "table",
+      _captcha: "false",
+      "Họ tên": f.get("name"),
+      "Số điện thoại/Zalo": f.get("phone"),
+      "Ngày giờ xem phòng": f.get("viewing"),
+      "Phòng": room,
+      "Địa chỉ": address,
+      "Ghi chú": note
+    })
+  }).then(function(r){ return r.json(); }).then(function(j){
+    if (j && String(j.success) === "true") {
+      alert("Đã gửi yêu cầu đặt lịch. Chủ nhà sẽ liên hệ lại qua số điện thoại bạn đã để lại.");
+      done();
+    } else {
+      byMail();
+    }
+  }).catch(byMail);
 });
 
 // ===== BẢNG CHI TIẾT =====

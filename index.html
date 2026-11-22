@@ -490,6 +490,40 @@ document.getElementById("resetBtn").addEventListener("click", function(){
   render();
 });
 
+// ===== NÚT QUAY LẠI CỦA ĐIỆN THOẠI =====
+// Bảng chi tiết, ảnh phóng to và form đặt lịch mỗi lớp có một mục lịch sử riêng,
+// nên bấm Quay lại chỉ đóng lớp đang mở, không thoát khỏi trang web.
+var NAV = []; // các lớp đang mở, từ dưới lên
+function topName(){ return NAV.length ? NAV[NAV.length - 1].name : ""; }
+function hPush(depth){ try { history.pushState({ cthn: depth }, ""); } catch (err) {} }
+function hReplace(depth){ try { history.replaceState({ cthn: depth }, ""); } catch (err) {} }
+function navPush(name, show, hide){
+  NAV.push({ name: name, show: show, hide: hide });
+  show();
+  hPush(NAV.length);
+}
+function navSwap(name, show, hide){ // thay lớp trên cùng, không thêm mục lịch sử
+  var top = NAV.pop(); if (top) top.hide();
+  NAV.push({ name: name, show: show, hide: hide });
+  show();
+  hReplace(NAV.length);
+}
+function navClose(){ // đóng lớp trên cùng: nút ×, bấm nền, phím Esc
+  var top = NAV.pop(); if (!top) return;
+  top.hide();
+  try { history.back(); } catch (err) {}
+}
+window.addEventListener("popstate", function(e){ // nút Quay lại của điện thoại
+  var want = (e.state && e.state.cthn) || 0;
+  while (NAV.length > want) NAV.pop().hide();
+});
+function drawerShow(){ document.getElementById("drawer").classList.add("open"); document.getElementById("drawerBg").classList.add("open"); }
+function drawerHide(){ document.getElementById("drawer").classList.remove("open"); document.getElementById("drawerBg").classList.remove("open"); }
+function lbShow(){ document.getElementById("lightbox").classList.add("open"); }
+function lbHide(){ var vid = document.getElementById("lbVid"); if (vid) vid.pause(); document.getElementById("lightbox").classList.remove("open"); }
+function modalShow(){ document.getElementById("modal").classList.add("open"); }
+function modalHide(){ document.getElementById("modal").classList.remove("open"); }
+
 // Đặt lịch xem
 var currentId = null;
 function openModal(id){
@@ -498,9 +532,10 @@ function openModal(id){
   var head = l ? [l.title, l.area].filter(Boolean).map(esc).join(" · ") + (l.address ? "<br>" + esc(l.address) : "") : "";
   document.getElementById("modalTitle").innerHTML = head;
   document.getElementById("viewLabel").textContent = "Ngày giờ xem phòng";
-  document.getElementById("modal").classList.add("open");
+  if (topName() === "drawer") navSwap("modal", modalShow, modalHide);
+  else navPush("modal", modalShow, modalHide);
 }
-function closeModal(){ document.getElementById("modal").classList.remove("open"); }
+function closeModal(){ if (topName() === "modal") navClose(); }
 
 document.getElementById("bookForm").addEventListener("submit", function(e){
   e.preventDefault();
@@ -544,7 +579,7 @@ function gallery(l){
 function openLightbox(i){
   lbIndex = i;
   drawLightbox();
-  document.getElementById("lightbox").classList.add("open");
+  navPush("lightbox", lbShow, lbHide);
 }
 function drawLightbox(){
   var n = currentPhotos.length, f = currentPhotos[lbIndex] || "";
@@ -565,11 +600,7 @@ function lbStep(d){
   lbIndex = (lbIndex + d + currentPhotos.length) % currentPhotos.length;
   drawLightbox();
 }
-function closeLightbox(){
-  var vid = document.getElementById("lbVid");
-  if (vid) vid.pause();
-  document.getElementById("lightbox").classList.remove("open");
-}
+function closeLightbox(){ if (topName() === "lightbox") navClose(); }
 function findListing(id){ return LISTINGS.filter(function(x){ return x.id===id; })[0]; }
 function openDetail(id){
   var l = findListing(id); if(!l) return;
@@ -595,21 +626,17 @@ function openDetail(id){
     '<a href="tel:0978071601">Gọi</a>' +
     '<a href="https://zalo.me/0978071601">Zalo</a>';
   var bk = document.getElementById("dBook");
-  if (l.status==="con") { bk.style.display=""; bk.onclick=function(){ closeDetail(); openModal(l.id); }; }
+  if (l.status==="con") { bk.style.display=""; bk.onclick=function(){ openModal(l.id); }; }
   else { bk.style.display="none"; }
-  document.getElementById("drawer").classList.add("open");
-  document.getElementById("drawerBg").classList.add("open");
   document.getElementById("dBody").scrollTop = 0;
+  if (topName() !== "drawer") navPush("drawer", drawerShow, drawerHide);
 }
-function closeDetail(){
-  document.getElementById("drawer").classList.remove("open");
-  document.getElementById("drawerBg").classList.remove("open");
-}
+function closeDetail(){ if (topName() === "drawer") navClose(); }
 document.addEventListener("keydown", function(e){
-  var lb = document.getElementById("lightbox").classList.contains("open");
-  if (e.key === "Escape") { if (lb) closeLightbox(); else closeDetail(); }
-  if (lb && e.key === "ArrowLeft") lbStep(-1);
-  if (lb && e.key === "ArrowRight") lbStep(1);
+  var top = topName();
+  if (e.key === "Escape" && top) navClose();
+  if (top === "lightbox" && e.key === "ArrowLeft") lbStep(-1);
+  if (top === "lightbox" && e.key === "ArrowRight") lbStep(1);
 });
 
 

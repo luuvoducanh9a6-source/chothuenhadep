@@ -68,7 +68,7 @@
   /* ===== GIAO DIỆN CAO CẤP ===== */
   body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
   h1,h2,h3,.brand{letter-spacing:-.025em}
-  header{background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);border-bottom:1px solid var(--line)}
+  header{background:var(--card);border-bottom:1px solid var(--line)}
   .brand{font-weight:700}
   .btn{border-radius:999px;padding:11px 22px;font-weight:600;letter-spacing:-.01em;box-shadow:0 1px 2px rgba(0,0,0,.08)}
   .btn:hover{transform:translateY(-1px);box-shadow:0 6px 18px color-mix(in srgb,var(--main) 35%,transparent)}
@@ -79,7 +79,7 @@
   .hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.04;font-weight:700;max-width:14ch;letter-spacing:-.035em}
   .hero p{font-size:clamp(16px,1.6vw,19px);opacity:.88;max-width:560px;margin-top:18px;font-weight:400}
   .hero .wrap{position:relative;z-index:1}
-  .filters{border-radius:20px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.14);backdrop-filter:blur(10px)}
+  .filters{border-radius:20px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.14)}
   .field label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
   .field select,.field input,.toolbar select{border-radius:12px;padding:12px 14px;transition:border-color .2s,box-shadow .2s}
   .field select:focus,.field input:focus,.toolbar select:focus{outline:none;border-color:var(--main);box-shadow:0 0 0 4px color-mix(in srgb,var(--main) 18%,transparent)}
@@ -108,8 +108,8 @@
   .card .pic{height:210px;position:relative;overflow:hidden}
   .card .pic img{width:100%;height:100%;object-fit:cover;display:block}
   .card .pic .ph-text{color:var(--muted)}
-  .type-tag{position:absolute;left:12px;top:12px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)}
-  .st-pill{position:absolute;right:12px;top:12px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;backdrop-filter:blur(6px)}
+  .type-tag{position:absolute;left:12px;top:12px;background:rgba(0,0,0,.62);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px}
+  .st-pill{position:absolute;right:12px;top:12px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px}
   .st-pill.ok{background:var(--main);color:#fff}
   .st-pill.gone{background:rgba(255,255,255,.85);color:#4b5552}
   .card .body{padding:14px 16px 6px;display:block}
@@ -153,7 +153,7 @@
   .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,#000,transparent 80%);pointer-events:none}
   .hero .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.14);padding:6px 12px;border-radius:999px;margin-bottom:18px}
   .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:34px;max-width:620px}
-  .hero-stats div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:14px 16px;backdrop-filter:blur(8px)}
+  .hero-stats div{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:14px 16px}
   .hero-stats b{display:block;font-size:clamp(20px,2.4vw,28px);font-weight:800;letter-spacing:-.02em}
   .hero-stats span{font-size:12px;opacity:.85}
   @media (max-width:520px){.hero-stats{grid-template-columns:1fr}}
@@ -162,8 +162,7 @@
   @keyframes heroIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
   .hero .wrap{animation:heroIn .7s ease both}
   .filters{animation:fadeUp .6s ease .15s both}
-  .card{animation:fadeUp .45s ease both;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-  .card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(n+5){animation-delay:.2s}
+  .card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;content-visibility:auto;contain-intrinsic-size:auto 440px}
   .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--main)}
   .card .pic img{transition:transform .4s ease}
   .card:hover .pic img{transform:scale(1.04)}
@@ -239,13 +238,22 @@
 .d-strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:16px}
 .d-strip > div{flex:0 0 128px;height:96px;border-radius:10px;overflow:hidden;background:var(--ph);cursor:zoom-in;position:relative}
 .d-strip img{width:100%;height:100%;object-fit:cover;display:block}
+/* Nút xem thêm, thông báo form đặt lịch, ô bẫy bot */
+.more-wrap{text-align:center;margin:-22px 0 44px}
+.more-wrap[hidden]{display:none}
+.more-wrap .btn{min-width:240px}
+.form-msg{display:none;font-size:14px;line-height:1.45;border-radius:10px;padding:10px 12px}
+.form-msg.show{display:block}
+.form-msg.ok{background:var(--soft);color:var(--main);font-weight:600}
+.form-msg.err{background:color-mix(in srgb,#c2410c 12%,var(--card));color:#c2410c}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <a href="#" class="brand"><span class="brand-logo" role="img" aria-label="Cho thuê nhà đẹp"></span>>Cho thuê nhà đẹp</a>
+    <a href="#" class="brand"><span class="brand-logo" role="img" aria-label="Cho thuê nhà đẹp"></span>Cho thuê nhà đẹp</a>
     <div class="hdr-actions">
       <a class="btn light" href="tel:0978071601">Gọi ngay</a>
       <a class="btn" href="https://zalo.me/0978071601">Nhắn Zalo</a>
@@ -304,6 +312,7 @@
   </div>
 
   <div class="grid" id="grid"></div>
+  <div class="more-wrap" id="moreWrap" hidden><button class="btn light" id="moreBtn" type="button">Xem thêm phòng</button></div>
 
   <div class="why">
     <div><h4>Thông tin đúng thực tế</h4><p>Diện tích, giá và tiện ích đúng như khi bạn xem phòng.</p></div>
@@ -360,7 +369,9 @@
       <label class="view-lbl" id="viewLabel">Ngày giờ xem phòng</label>
       <input name="viewing" type="text" required placeholder="Ví dụ: 14h00 thứ bảy, ngày 28/11/2026">
       <textarea name="note" rows="3" placeholder="Ghi chú (không bắt buộc)"></textarea>
-      <button class="btn accent" type="submit">Gửi yêu cầu</button>
+      <input name="_honey" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+      <div class="form-msg" id="formMsg" role="status" aria-live="polite"></div>
+      <button class="btn accent" type="submit" id="bookBtn">Gửi yêu cầu</button>
       <p class="note">Yêu cầu sẽ gửi về email của chúng tôi. Chúng tôi xác nhận lại qua điện thoại hoặc Zalo.</p>
     </form>
   </div>
@@ -380,7 +391,7 @@ function isVid(f){ return /\.mp4$/i.test(f); }
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function mediaHtml(f, alt, lazy){
   if (isVid(f)) return '<video src="'+purl(f)+'#t=0.1" muted playsinline preload="metadata"></video>';
-  return '<img src="'+purl(f)+'" alt="'+esc(alt)+'" loading="'+(lazy ? "lazy" : "eager")+'">';
+  return '<img src="'+purl(f)+'" alt="'+esc(alt)+'" loading="'+(lazy ? "lazy" : "eager")+'" decoding="async">';
 }
 
 var state = {tab:"all"};
@@ -457,13 +468,31 @@ function card(l){
   '</article>';
 }
 
+// Hiển thị từng đợt 24 phòng cho nhẹ trang; bấm "Xem thêm phòng" để hiện tiếp
+var PAGE_SIZE = 24;
+var currentList = [], shownCount = 0;
 function render(){
-  var list = getFiltered();
-  document.getElementById("grid").innerHTML = list.length
-    ? list.map(card).join("")
-    : '<div class="empty">Không có phòng nào khớp bộ lọc. Anh/chị thử bỏ bớt điều kiện hoặc gọi 0978 07 16 01.</div>';
-  document.getElementById("count").textContent = list.length + " phòng";
+  currentList = getFiltered();
+  shownCount = 0;
+  var grid = document.getElementById("grid");
+  if (currentList.length) {
+    grid.innerHTML = "";
+    appendCards();
+  } else {
+    grid.innerHTML = '<div class="empty">Không có phòng nào khớp bộ lọc. Anh/chị thử bỏ bớt điều kiện hoặc gọi 0978 07 16 01.</div>';
+    document.getElementById("moreWrap").hidden = true;
+  }
+  document.getElementById("count").textContent = currentList.length + " phòng";
 }
+function appendCards(){
+  var next = currentList.slice(shownCount, shownCount + PAGE_SIZE);
+  document.getElementById("grid").insertAdjacentHTML("beforeend", next.map(card).join(""));
+  shownCount += next.length;
+  var left = currentList.length - shownCount;
+  document.getElementById("moreWrap").hidden = left <= 0;
+  document.getElementById("moreBtn").textContent = "Xem thêm phòng (còn " + left.toLocaleString("vi-VN") + ")";
+}
+document.getElementById("moreBtn").addEventListener("click", appendCards);
 
 // Tab nhanh
 document.querySelectorAll(".tab").forEach(function(btn){
@@ -528,6 +557,7 @@ function modalHide(){ document.getElementById("modal").classList.remove("open");
 var currentId = null;
 function openModal(id){
   currentId = id;
+  resetBookForm();
   var l = findListing(id);
   var head = l ? [l.title, l.area].filter(Boolean).map(esc).join(" · ") + (l.address ? "<br>" + esc(l.address) : "") : "";
   document.getElementById("modalTitle").innerHTML = head;
@@ -537,56 +567,72 @@ function openModal(id){
 }
 function closeModal(){ if (topName() === "modal") navClose(); }
 
+// Gửi yêu cầu đặt lịch thẳng về Gmail của chủ nhà qua FormSubmit.
+// Khách không bị chuyển sang ứng dụng email; kết quả hiện ngay trong form.
+var BOOK_URL = "https://formsubmit.co/ajax/luuvoducanh9a6@gmail.com";
+var HOTLINE = "0978 07 16 01";
+function setFormMsg(kind, text){
+  var box = document.getElementById("formMsg");
+  box.className = "form-msg show " + kind;
+  box.textContent = text;
+}
+function clearFormMsg(){
+  var box = document.getElementById("formMsg");
+  box.className = "form-msg";
+  box.textContent = "";
+}
+function resetBookForm(){
+  var btn = document.getElementById("bookBtn");
+  btn.disabled = false;
+  btn.textContent = "Gửi yêu cầu";
+  clearFormMsg();
+}
+// Trả về true nếu FormSubmit báo đã nhận; lỗi mạng thì thử lại một lần sau 2 giây
+function postBooking(data, canRetry){
+  return fetch(BOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify(data)
+  }).then(function(r){
+    return r.json().catch(function(){ return null; });
+  }).then(function(j){
+    return !!j && String(j.success) === "true";
+  }, function(err){
+    if (!canRetry) throw err;
+    return new Promise(function(wake){ setTimeout(wake, 2000); })
+      .then(function(){ return postBooking(data, false); });
+  });
+}
 document.getElementById("bookForm").addEventListener("submit", function(e){
   e.preventDefault();
   var form = this;
   var f = new FormData(form);
+  if (f.get("_honey")) return; // ô bẫy bot: không gửi, cũng không báo lỗi
   var l = findListing(currentId);
-  var subject = "Đặt lịch xem: " + (l ? (l.title || l.address || "phòng") : "phòng");
-  var room = l ? [l.title, l.area].filter(Boolean).join(" - ") : "";
-  var address = l ? (l.address || "") : "";
-  var note = f.get("note") || "không";
-  var btn = form.querySelector('button[type="submit"]');
-  if (btn) btn.disabled = true;
-  function done(){
-    if (btn) btn.disabled = false;
-    closeModal();
+  var btn = document.getElementById("bookBtn");
+  btn.disabled = true;
+  btn.textContent = "Đang gửi...";
+  clearFormMsg();
+  postBooking({
+    _subject: "Đặt lịch xem: " + (l ? (l.title || l.address || "phòng") : "phòng"),
+    _template: "table",
+    _captcha: "false",
+    "Họ tên": f.get("name"),
+    "Số điện thoại/Zalo": f.get("phone"),
+    "Ngày giờ xem phòng": f.get("viewing"),
+    "Phòng": l ? [l.title, l.area].filter(Boolean).join(" - ") : "",
+    "Địa chỉ": l ? (l.address || "") : "",
+    "Ghi chú": f.get("note") || "không"
+  }, true).then(function(ok){
+    if (!ok) throw new Error("không nhận được xác nhận");
     form.reset();
-  }
-  // Dự phòng: mở email đã điền sẵn nếu không gửi trực tiếp được
-  function byMail(){
-    var body = "Họ tên: " + f.get("name") + "\n" +
-               "Số điện thoại/Zalo: " + f.get("phone") + "\n" +
-               "Ngày giờ xem phòng: " + f.get("viewing") + "\n" +
-               "Phòng: " + room + "\n" +
-               "Địa chỉ: " + address + "\n" +
-               "Ghi chú: " + note;
-    window.location.href = "mailto:luuvoducanh9a6@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    done();
-  }
-  // Gửi thẳng về Gmail của chủ nhà qua FormSubmit, khách không phải làm thêm bước nào
-  fetch("https://formsubmit.co/ajax/luuvoducanh9a6@gmail.com", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "Accept": "application/json" },
-    body: JSON.stringify({
-      _subject: subject,
-      _template: "table",
-      _captcha: "false",
-      "Họ tên": f.get("name"),
-      "Số điện thoại/Zalo": f.get("phone"),
-      "Ngày giờ xem phòng": f.get("viewing"),
-      "Phòng": room,
-      "Địa chỉ": address,
-      "Ghi chú": note
-    })
-  }).then(function(r){ return r.json(); }).then(function(j){
-    if (j && String(j.success) === "true") {
-      alert("Đã gửi yêu cầu đặt lịch. Chủ nhà sẽ liên hệ lại qua số điện thoại bạn đã để lại.");
-      done();
-    } else {
-      byMail();
-    }
-  }).catch(byMail);
+    setFormMsg("ok", "Đã gửi yêu cầu đặt lịch. Chủ nhà sẽ liên hệ lại qua số điện thoại bạn đã để lại.");
+    btn.textContent = "Đã gửi"; // giữ khóa nút để không gửi trùng
+  }).catch(function(){
+    btn.disabled = false;
+    btn.textContent = "Gửi yêu cầu";
+    setFormMsg("err", "Chưa gửi được yêu cầu. Anh/chị vui lòng thử lại sau ít phút, hoặc gọi hoặc nhắn Zalo " + HOTLINE + " để đặt lịch. Thông tin đã nhập vẫn được giữ lại.");
+  });
 });
 
 // ===== BẢNG CHI TIẾT =====

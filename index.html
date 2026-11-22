@@ -653,6 +653,15 @@ document.addEventListener("keydown", function(e){
   }
 })();
 
+// Link trực tiếp tới một phòng: ?phong=<mã phòng>, ví dụ ?phong=a210-p004
+(function(){
+  var m = /[?&]phong=([^&#]+)/.exec(location.search);
+  if (!m) return;
+  var code = decodeURIComponent(m[1]);
+  var l = LISTINGS.filter(function(x){ return x.pid === code; })[0];
+  if (l) openDetail(l.id);
+})();
+
 render();
 </script>
 </body>
